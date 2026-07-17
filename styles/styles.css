@@ -710,6 +710,21 @@ lista de datos de contacto: cada item con su icono y el texto alineados
     display: flex;
     align-items: center;
     gap: 12px;
+    /* min-width:0 permite que el item flex se achique por debajo del ancho
+       de su contenido; sin esto, un texto largo sin espacios (el email)
+       fuerza la columna a ensancharse y genera scroll horizontal en mobile */
+    min-width: 0;
+}
+
+/*
+overflow-wrap:anywhere corta las palabras largas sin espacios (como el email)
+cuando no entran en el ancho disponible, en vez de desbordar la tarjeta
+*/
+
+.lista-datos-contacto li .parrafo,
+.lista-datos-contacto li .enlace-nav {
+    min-width: 0;
+    overflow-wrap: anywhere;
 }
 
 .dato-icono {
