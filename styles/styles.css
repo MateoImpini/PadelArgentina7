@@ -1,0 +1,742 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+/*
+============================
+Variables de tema (paleta del sitio)
+============================
+centralizar los colores en :root evita repetir los mismos rgb() en decenas
+de reglas y permite ajustar toda la estetica desde un solo lugar
+*/
+
+:root {
+    color-scheme: light;
+
+    /* --- paleta base (colores crudos del sitio) --- */
+
+    /* verdes */
+    --verde-marca: rgb(22, 34, 22);
+    --verde-oscuro: rgb(40, 56, 38);
+    --verde-medio: rgb(44, 62, 44);
+    --verde-lima: rgb(233, 250, 158);
+
+    /* marrones (acentos) */
+    --marron: rgb(85, 32, 1);
+    --marron-oscuro: rgb(58, 21, 0);
+    --marron-suave: rgb(80, 64, 46);
+    --marron-suave-oscuro: rgb(50, 40, 28);
+    --marron-titulo: rgb(32, 12, 0);
+
+    /* neutros */
+    --blanco: rgb(255, 254, 254);
+    --blanco-puro: rgb(255, 255, 255);
+    --negro: rgb(0, 0, 0);
+
+    /*
+    --- tokens semanticos ---
+    describen el ROL de cada color (fondo, texto, acento...) en vez del color
+    en si. las reglas del sitio usan estos tokens: cambiando estos pocos valores
+    se repinta toda la estetica sin tocar el resto del archivo
+    */
+    /* paleta "Verde cancha": monocromatica verde sobre crema */
+    --fondo-pagina: rgb(247, 247, 239);
+    --fondo-tarjeta: rgb(233, 241, 211);
+    --superficie-oscura: rgb(30, 46, 30);
+
+    --texto-principal: rgb(31, 42, 31);
+    --texto-secundario: rgb(91, 107, 79);
+    --texto-tenue: rgb(130, 135, 120);
+    --texto-claro: rgb(233, 241, 211);
+
+    --acento: rgb(46, 94, 52);
+    --acento-boton: rgb(46, 94, 52);
+    --acento-boton-hover: rgb(35, 72, 38);
+    --texto-sobre-acento: var(--blanco);
+
+    /* utilidades reutilizables */
+    --radio: 8px;
+    --sombra-tarjeta: 0 2px 6px rgba(0, 0, 0, 0.08);
+    --sombra-tarjeta-hover: 0 8px 16px rgba(0, 0, 0, 0.15);
+    --transicion: 0.2s ease;
+}
+
+/*
+reset global: sin esta regla, el padding/margin por defecto del navegador
+rompe los anchos calculados en los layouts flex
+*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/*
+scroll suave al navegar con anclas dentro de la pagina
+*/
+
+html {
+    scroll-behavior: smooth;
+}
+
+/*
+color y fondo de la pagina.
+display:flex + min-height:100vh en columna: hace que el footer quede
+pegado abajo aunque la pagina tenga poco contenido (ver flex en .main-contenido)
+*/
+
+.cuerpo-pagina {
+    background-color: var(--fondo-pagina);
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.6;
+    color: var(--texto-principal);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/*
+navbar de Bootstrap (navbar-expand-lg + navbar-dark) recoloreada con la
+paleta propia del sitio. navbar-dark se encarga del icono de hamburguesa
+en blanco; el color de fondo y de los links se pisa con estas reglas
+*/
+
+.navbar-personalizado {
+    background-color: var(--superficie-oscura);
+    padding: 12px 20px;
+}
+
+/*
+placa del logo: mismo verde oscuro que usaba el header manual,
+ahora como bloque redondeado dentro del navbar-brand de Bootstrap
+*/
+
+.brand-personalizado {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2px;
+    background-color: var(--verde-marca);
+    padding: 10px 16px;
+    border-radius: var(--radio);
+    text-decoration: none;
+}
+
+.brand-personalizado .titulo-principal {
+    font-size: 28px;
+}
+
+/*
+texto de los links en tonos claros para leerse sobre el fondo oscuro del navbar.
+especificidad igualada a las reglas .navbar-dark .navbar-nav .nav-link de
+Bootstrap para poder pisar sus colores por defecto
+*/
+
+.navbar-personalizado .navbar-nav .enlace-nav {
+    color: var(--texto-claro);
+}
+
+.navbar-personalizado .navbar-nav .enlace-nav:hover,
+.navbar-personalizado .navbar-nav .enlace-nav:focus {
+    color: var(--blanco-puro);
+}
+
+/*
+contenedor principal: secciones apiladas con separacion uniforme via gap.
+flex:1 0 auto empuja el footer hacia abajo cuando hay poco contenido.
+max-width + margin auto: en pantallas grandes el contenido no se estira
+de borde a borde y queda centrado y legible
+*/
+
+.main-contenido {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 20px;
+    flex: 1 0 auto;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/*
+contenedor pequeño: cada articulo con aire interno propio.
+sombra sutil por defecto para dar profundidad; transition + hover
+suman un efecto de elevacion al pasar el mouse
+*/
+
+.tarjeta {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 20px;
+    background-color: var(--fondo-tarjeta);
+    border-radius: var(--radio);
+    box-shadow: var(--sombra-tarjeta);
+    transition: transform var(--transicion), box-shadow var(--transicion);
+}
+
+.tarjeta:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--sombra-tarjeta-hover);
+}
+
+/*
+grid maestro de la home: mobile-first, 1 columna apilada.
+grid-template-areas nombra cada seccion para reordenar el layout
+sin tocar el orden del HTML al cambiar de breakpoint
+*/
+
+.grid-secciones {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+        "pagos"
+        "envios"
+        "atencion";
+    gap: 24px;
+}
+
+/*
+asignacion de cada seccion a su area nombrada (home)
+*/
+
+.seccion-pagos {
+    grid-area: pagos;
+}
+
+.seccion-envios {
+    grid-area: envios;
+}
+
+.seccion-atencion {
+    grid-area: atencion;
+}
+
+/*
+grid de catalogo de productos: mobile-first, 1 columna apilada,
+se abre a 2 y 3 columnas fluidas (fr) en los breakpoints siguientes
+*/
+
+.grid-productos {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+}
+
+/*
+alineacion del catalogo: para que las fotos arranquen a la misma altura en
+todas las tarjetas, se reserva un alto minimo parejo al titulo (hasta 2 lineas)
+y a la descripcion (hasta 3 lineas). asi el bloque de texto superior mide igual
+en todas y la imagen queda alineada. la foto usa alto fijo + object-fit:contain
+para verse completa y del mismo tamaño en toda la grilla
+*/
+
+.grid-productos .subtitulo {
+    min-height: 84px;
+}
+
+.grid-productos .tarjeta > .parrafo {
+    min-height: 77px;
+}
+
+.grid-productos figure {
+    width: 100%;
+    align-items: stretch;
+}
+
+.grid-productos figure img {
+    width: 100%;
+    height: 260px;
+    object-fit: contain;
+    background-color: var(--blanco-puro);
+}
+
+/*
+grid de la pagina "sobre nosotros": mobile-first, 1 columna apilada,
+con areas nombradas igual que la home
+*/
+
+.grid-nosotros {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+        "historia"
+        "mision"
+        "valores"
+        "equipo";
+    gap: 24px;
+}
+
+/*
+asignacion de cada seccion a su area nombrada (sobre nosotros)
+*/
+
+.seccion-historia {
+    grid-area: historia;
+}
+
+.seccion-mision {
+    grid-area: mision;
+}
+
+.seccion-valores {
+    grid-area: valores;
+}
+
+.seccion-equipo {
+    grid-area: equipo;
+}
+
+/*
+lista de valores de la empresa, sin viñetas por defecto del navegador
+*/
+
+.lista-valores {
+    list-style: disc;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+/*
+footer: bloques distribuidos con flex y separacion via gap
+*/
+
+.pie-pagina {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    background-color: var(--superficie-oscura);
+}
+
+/*
+texto en tonos claros para leerse sobre el fondo oscuro del footer
+*/
+
+.pie-pagina .titulo-footer {
+    color: var(--blanco-puro);
+}
+
+.pie-pagina .parrafo {
+    color: var(--texto-claro);
+}
+
+.pie-pagina .enlace-nav {
+    color: var(--texto-claro);
+}
+
+.pie-pagina .enlace-nav:hover {
+    color: var(--blanco-puro);
+}
+
+/*
+franja de copyright: tono mas suave que el resto del footer para
+diferenciarla como cierre de la pagina
+*/
+
+.footer-copyright {
+    background-color: var(--verde-medio);
+    padding: 16px 20px;
+}
+
+.footer-copyright .parrafo {
+    color: var(--texto-claro);
+}
+
+/*
+bloque de redes sociales del footer
+*/
+
+.redes-sociales {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.lista-redes {
+    display: flex;
+    gap: 16px;
+    list-style: none;
+}
+
+/*
+medios de pago y de envio: mismo patron que redes-sociales,
+los logos van en tarjetas blancas para que se lean sobre cualquier fondo
+*/
+
+.medios-pago,
+.medios-envio {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.lista-logos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    list-style: none;
+}
+
+/*
+transform + transition: leve efecto de zoom al pasar el mouse sobre un logo
+*/
+
+.lista-logos li {
+    display: flex;
+    align-items: center;
+    background-color: var(--blanco-puro);
+    border-radius: 6px;
+    padding: 6px 10px;
+    transition: transform var(--transicion);
+}
+
+.lista-logos li:hover {
+    transform: scale(1.06);
+}
+
+.lista-logos img {
+    display: block;
+    height: 24px;
+    width: auto;
+}
+
+/*
+color y fondo del titulo principal
+*/
+
+.titulo-principal {
+    color: var(--blanco-puro);
+    font-size: 50px;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 0.5px;
+}
+
+/*
+subtitulos de seccion. el pseudo-elemento ::after dibuja una linea de acento
+corta debajo del titulo para reforzarlo visualmente sin recargar
+*/
+
+.subtitulo {
+    color: var(--acento);
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+.subtitulo::after {
+    content: "";
+    display: block;
+    width: 48px;
+    height: 3px;
+    margin-top: 6px;
+    background-color: var(--acento);
+    border-radius: 2px;
+}
+
+/*
+color para los titulos del footer
+*/
+
+.titulo-footer {
+    color: var(--marron-titulo);
+    font-size: 25px;
+    font-weight: 500;
+}
+
+/*
+color de acento, complementario al fondo verde-amarillo, usado para resaltar enlaces y elementos interactivos
+*/
+
+.color-acento {
+    color: var(--acento);
+}
+
+/*
+transition en color: el cambio de :hover y el de aria-current se ven
+suaves en vez de instantaneos
+*/
+
+.enlace-nav {
+    color: var(--acento);
+    font-weight: 500;
+    text-decoration: none;
+    transition: color var(--transicion);
+}
+
+.enlace-nav:hover {
+    color: var(--acento-boton-hover);
+    text-decoration: underline;
+}
+
+/*
+marca visualmente el link de la pagina actual (aria-current="page" en el HTML)
+para reforzar la indicacion de posicion tanto visual como para lectores de pantalla
+*/
+
+.enlace-nav[aria-current="page"] {
+    text-decoration: underline;
+    font-weight: 700;
+}
+
+/*
+accesibilidad: contorno visible al navegar con teclado (Tab) sobre enlaces
+y botones, sin afectar el click con el mouse (:focus-visible)
+*/
+
+.enlace-nav:focus-visible,
+.btn-detalle:focus-visible {
+    outline: 3px solid var(--acento);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/*
+figure en columna para que el figcaption quede siempre debajo de la imagen
+*/
+
+figure {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+/*
+overflow:hidden recorta el zoom de la imagen al pasar el mouse (ver :hover)
+para que el efecto quede contenido dentro del marco redondeado
+*/
+
+.tarjeta figure {
+    overflow: hidden;
+    border-radius: var(--radio);
+}
+
+/*
+object-fit:cover recorta las fotos rectangulares (como las de accesorios)
+al cuadrado de 300x300 sin deformarlas.
+transform + transition: leve zoom al pasar el mouse sobre la tarjeta
+*/
+
+.tarjeta figure img {
+    object-fit: cover;
+    border-radius: var(--radio);
+    max-width: 100%;
+    transition: transform 0.3s ease;
+}
+
+.tarjeta:hover figure img {
+    transform: scale(1.05);
+}
+
+/*
+clase para diferenciar el texto destacado de la paleta pro
+*/
+
+.texto-paleta-pro {
+    display: inline-block;
+    color: var(--texto-principal);
+    font-size: 20px;
+    font-weight: 500;
+    background-color: var(--fondo-tarjeta);
+    border-left: 4px solid var(--acento);
+    padding: 4px 8px;
+}
+
+/*
+precio y cuotas de un producto
+*/
+
+.precio {
+    color: var(--acento);
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.cuotas {
+    color: var(--texto-secundario);
+    font-size: 14px;
+    font-weight: 400;
+}
+
+/*
+precio anterior de un producto en oferta: tachado y en gris para que
+el precio con descuento se lleve la atencion
+*/
+
+.precio-anterior {
+    color: var(--texto-tenue);
+    font-size: 16px;
+    font-weight: 400;
+    text-decoration: line-through;
+    margin-right: 6px;
+}
+
+/*
+etiqueta de descuento (badge de Bootstrap) recoloreada con el marron
+de acento del sitio
+*/
+
+.badge-descuento {
+    background-color: var(--acento-boton);
+    color: var(--texto-sobre-acento);
+    align-self: flex-start;
+}
+
+/*
+clase para los parrafos generales
+*/
+
+.parrafo {
+    color: var(--texto-principal);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.6;
+}
+
+/*
+galeria (carousel de Bootstrap): fondo blanco e imagen contenida
+para que las fotos de producto (fondo blanco/transparente) no se recorten
+*/
+
+.seccion-galeria .tarjeta {
+    padding-bottom: 8px;
+}
+
+.carousel-personalizado .carousel-item img {
+    height: 380px;
+    width: 100%;
+    object-fit: contain;
+    background-color: var(--fondo-tarjeta);
+    border-radius: var(--radio);
+}
+
+.carousel-personalizado .carousel-caption {
+    background-color: rgba(40, 56, 38, 0.75);
+    border-radius: var(--radio);
+    bottom: 24px;
+}
+
+.carousel-personalizado .carousel-control-prev-icon,
+.carousel-personalizado .carousel-control-next-icon {
+    background-color: var(--superficie-oscura);
+    border-radius: 50%;
+    padding: 18px;
+}
+
+.carousel-personalizado .carousel-indicators [data-bs-target] {
+    background-color: var(--acento);
+}
+
+/*
+boton para abrir el modal de detalle de un producto (Bootstrap modal).
+transform en :hover: leve elevacion que acompaña el cambio de color
+*/
+
+.btn-detalle {
+    align-self: flex-start;
+    /* margin-top:auto empuja el boton al fondo de la tarjeta: como las
+       tarjetas de una fila comparten altura, todos los botones se alinean */
+    margin-top: auto;
+    background-color: var(--acento-boton);
+    color: var(--texto-sobre-acento);
+    border: none;
+    transition: background-color var(--transicion), transform var(--transicion);
+}
+
+.btn-detalle:hover,
+.btn-detalle:focus {
+    background-color: var(--acento-boton-hover);
+    color: var(--texto-sobre-acento);
+    transform: translateY(-2px);
+}
+
+/*
+modal de detalle de producto: mismos colores de tarjeta/subtitulo del sitio
+*/
+
+.modal-personalizado {
+    background-color: var(--fondo-tarjeta);
+    border-radius: var(--radio);
+}
+
+.modal-personalizado .modal-header,
+.modal-personalizado .modal-footer {
+    border-color: rgba(80, 64, 46, 0.25);
+}
+
+.modal-personalizado .modal-title {
+    margin-bottom: 0;
+}
+
+/*
+el subtitulo dentro del modal no lleva la linea de acento inferior
+*/
+
+.modal-personalizado .modal-title.subtitulo::after {
+    display: none;
+}
+
+/*
+============================
+Escalera responsiva (mobile-first)
+============================
+*/
+
+/*
+tablet: la grilla de la home pasa a 2 columnas y el catalogo a 2 columnas
+*/
+
+@media (min-width: 768px) {
+    .grid-secciones {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+            "pagos envios"
+            "atencion atencion";
+    }
+
+    .grid-productos {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .grid-nosotros {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+            "historia historia"
+            "mision valores"
+            "equipo equipo";
+    }
+}
+
+/*
+desktop: la grilla de la home pasa a 3 columnas (destacado ocupa todo el ancho
+superior), el catalogo de productos muestra 3 columnas y "sobre nosotros" 4.
+el menu vuelve a fila y el logo deja de ocupar el 100% del ancho
+*/
+
+@media (min-width: 1024px) {
+    .grid-secciones {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-areas: "pagos envios atencion";
+    }
+
+    .grid-productos {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .grid-nosotros {
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-areas: "historia mision valores equipo";
+    }
+
+    .brand-personalizado .titulo-principal {
+        font-size: 34px;
+    }
+}
