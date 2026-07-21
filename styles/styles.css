@@ -169,7 +169,6 @@ mobile-first: padding y titulo mas chicos, se agrandan en tablet/desktop
 
 .hero {
     background: linear-gradient(135deg, var(--verde-marca), var(--acento));
-    border-radius: var(--radio);
     padding: 40px 20px;
     box-shadow: var(--sombra-tarjeta);
 }

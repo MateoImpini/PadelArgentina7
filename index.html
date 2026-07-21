@@ -36,23 +36,25 @@
         </nav>
     </header>
 
+    <!-- Hero: portada full-width de la home. Va FUERA de .main-contenido
+         (que limita el ancho a 1200px) para ocupar todo el ancho de la
+         pagina sin margenes a los costados. El texto interno se mantiene
+         centrado y legible via .hero-contenido -->
+    <section class="hero">
+        <div class="hero-contenido">
+            <p class="hero-eyebrow">Tu tienda de pádel en Argentina</p>
+            <h2 class="hero-titulo">Jugá como profesional</h2>
+            <p class="hero-texto">Paletas, indumentaria y accesorios de las mejores marcas, con envíos a todo el país y hasta 6 cuotas sin interés.</p>
+            <div class="hero-acciones">
+                <a class="btn btn-lg hero-btn-primario" href="pages/productos.html">Ver productos</a>
+                <a class="btn btn-lg hero-btn-secundario" href="pages/ofertas.html">Ver ofertas</a>
+            </div>
+        </div>
+    </section>
+
     <!-- Contenido  -->
     <!-- imagenes, textos, videos, articulos, tarjetas  -->
     <main class="main-contenido">
-        <!-- Hero: portada de bienvenida de la home (reemplaza al producto
-             destacado, que se repetia identico en la pagina de ofertas) -->
-        <section class="hero">
-            <div class="hero-contenido">
-                <p class="hero-eyebrow">Tu tienda de pádel en Argentina</p>
-                <h2 class="hero-titulo">Jugá como profesional</h2>
-                <p class="hero-texto">Paletas, indumentaria y accesorios de las mejores marcas, con envíos a todo el país y hasta 6 cuotas sin interés.</p>
-                <div class="hero-acciones">
-                    <a class="btn btn-lg hero-btn-primario" href="pages/productos.html">Ver productos</a>
-                    <a class="btn btn-lg hero-btn-secundario" href="pages/ofertas.html">Ver ofertas</a>
-                </div>
-            </div>
-        </section>
-
         <!-- Galeria de productos con el carousel de Bootstrap -->
         <section class="seccion-galeria">
             <article class="tarjeta">
