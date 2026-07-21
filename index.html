@@ -39,18 +39,18 @@
     <!-- Contenido  -->
     <!-- imagenes, textos, videos, articulos, tarjetas  -->
     <main class="main-contenido">
-        <section class="seccion-destacado">
-            <article class="tarjeta">
-                <h2 class="subtitulo">Productos Destacados</h2>
-                <p class="parrafo">Descubrí nuestra selección de paletas de pádel pensadas para todos los niveles de juego, desde principiantes hasta jugadores avanzados.</p>
-                <figure>
-                    <img src="imagenes/WR175111F_0_BELA_PRO_V25_LE_ARGENTINA_RD-1200x1200.webp" width="300" height="300" decoding="async" alt="Paleta Pro X">
-                    <figcaption class="texto-paleta-pro">Paleta Padel - Bela Team V2 - Wilson Color Rojo</figcaption>
-                </figure>
-                <span class="badge badge-descuento">¡En descuento!</span>
-                <p class="precio"><span class="precio-anterior">$500.000</span>$430.000</p>
-                <p class="cuotas">6 cuotas sin interés</p>
-            </article>
+        <!-- Hero: portada de bienvenida de la home (reemplaza al producto
+             destacado, que se repetia identico en la pagina de ofertas) -->
+        <section class="hero">
+            <div class="hero-contenido">
+                <p class="hero-eyebrow">Tu tienda de pádel en Argentina</p>
+                <h2 class="hero-titulo">Jugá como profesional</h2>
+                <p class="hero-texto">Paletas, indumentaria y accesorios de las mejores marcas, con envíos a todo el país y hasta 6 cuotas sin interés.</p>
+                <div class="hero-acciones">
+                    <a class="btn btn-lg hero-btn-primario" href="pages/productos.html">Ver productos</a>
+                    <a class="btn btn-lg hero-btn-secundario" href="pages/ofertas.html">Ver ofertas</a>
+                </div>
+            </div>
         </section>
 
         <!-- Galeria de productos con el carousel de Bootstrap -->

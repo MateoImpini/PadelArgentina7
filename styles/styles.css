@@ -161,6 +161,93 @@ de borde a borde y queda centrado y legible
 }
 
 /*
+hero de la home: banner de bienvenida a ancho completo. reemplaza la tarjeta
+de producto destacado (que se repetia identica en ofertas) para que el index
+tenga una portada propia. degradado en verdes de marca + CTA hacia el catalogo.
+mobile-first: padding y titulo mas chicos, se agrandan en tablet/desktop
+*/
+
+.hero {
+    background: linear-gradient(135deg, var(--verde-marca), var(--acento));
+    border-radius: var(--radio);
+    padding: 40px 20px;
+    box-shadow: var(--sombra-tarjeta);
+}
+
+.hero-contenido {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    max-width: 720px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* linea superior breve, en mayusculas, sobre el titulo del hero */
+.hero-eyebrow {
+    color: var(--verde-lima);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.hero-titulo {
+    color: var(--blanco-puro);
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.15;
+}
+
+.hero-texto {
+    color: var(--texto-claro);
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.6;
+}
+
+/* fila de botones del hero: envuelve en mobile si no entran en una linea */
+.hero-acciones {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+/* CTA principal: relleno lima que contrasta con el fondo verde */
+.hero-btn-primario {
+    background-color: var(--verde-lima);
+    color: var(--verde-marca);
+    font-weight: 700;
+    border: 2px solid var(--verde-lima);
+    transition: background-color var(--transicion), transform var(--transicion);
+}
+
+.hero-btn-primario:hover,
+.hero-btn-primario:focus {
+    background-color: var(--blanco-puro);
+    border-color: var(--blanco-puro);
+    color: var(--verde-marca);
+    transform: translateY(-2px);
+}
+
+/* CTA secundario: contorno lima sobre fondo transparente */
+.hero-btn-secundario {
+    background-color: transparent;
+    color: var(--blanco-puro);
+    border: 2px solid var(--verde-lima);
+    transition: background-color var(--transicion), color var(--transicion);
+}
+
+.hero-btn-secundario:hover,
+.hero-btn-secundario:focus {
+    background-color: var(--verde-lima);
+    color: var(--verde-marca);
+}
+
+/*
 contenedor pequeño: cada articulo con aire interno propio.
 sombra sutil por defecto para dar profundidad; transition + hover
 suman un efecto de elevacion al pasar el mouse
@@ -492,7 +579,8 @@ y botones, sin afectar el click con el mouse (:focus-visible)
 */
 
 .enlace-nav:focus-visible,
-.btn-detalle:focus-visible {
+.btn-detalle:focus-visible,
+.hero-acciones .btn:focus-visible {
     outline: 3px solid var(--acento);
     outline-offset: 2px;
     border-radius: 4px;
@@ -770,6 +858,14 @@ tablet: la grilla de la home pasa a 2 columnas y el catalogo a 2 columnas
 */
 
 @media (min-width: 768px) {
+    .hero {
+        padding: 60px 24px;
+    }
+
+    .hero-titulo {
+        font-size: 46px;
+    }
+
     .grid-secciones {
         grid-template-columns: 1fr 1fr;
         grid-template-areas:
