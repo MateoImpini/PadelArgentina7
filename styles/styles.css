@@ -143,6 +143,42 @@ Bootstrap para poder pisar sus colores por defecto
 }
 
 /*
+navbar en mobile: imita el header de un e-commerce (boton hamburguesa a la
+izquierda y logo centrado, todo en una sola fila). se aplica por debajo del
+breakpoint del navbar-expand-lg (992px), donde el menu esta colapsado.
+el toggler se saca del flujo con position:absolute y se ancla a la izquierda;
+asi la marca queda centrada en TODO el ancho con margin:0 auto, en vez de
+apilarse debajo. la marca se achica un poco para entrar comoda en una linea
+*/
+
+@media (max-width: 991.98px) {
+    .navbar-personalizado .container-fluid {
+        position: relative;
+    }
+
+    .navbar-personalizado .navbar-toggler {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        /* boton mas compacto: libera ancho para que el logo centrado no se
+           solape con la hamburguesa en pantallas angostas (~320px) */
+        padding: 4px 8px;
+        font-size: 18px;
+        z-index: 2;
+    }
+
+    .brand-personalizado {
+        margin: 0 auto;
+        padding: 8px 12px;
+    }
+
+    .brand-personalizado .titulo-principal {
+        font-size: 18px;
+    }
+}
+
+/*
 contenedor principal: secciones apiladas con separacion uniforme via gap.
 flex:1 0 auto empuja el footer hacia abajo cuando hay poco contenido.
 max-width + margin auto: en pantallas grandes el contenido no se estira
