@@ -159,8 +159,12 @@ apilarse debajo. la marca se achica un poco para entrar comoda en una linea
     .navbar-personalizado .navbar-toggler {
         position: absolute;
         left: 12px;
-        top: 50%;
-        transform: translateY(-50%);
+        /* anclado a top:0 (la fila del logo, que no se mueve) en vez de
+           top:50%: al abrir el menu el container-fluid crece hacia abajo y
+           un 50% mandaba la hamburguesa al medio del navbar expandido.
+           el boton y el logo tienen casi la misma altura, asi que quedan
+           alineados en la primera fila */
+        top: 0;
         /* boton mas compacto: libera ancho para que el logo centrado no se
            solape con la hamburguesa en pantallas angostas (~320px) */
         padding: 4px 8px;
