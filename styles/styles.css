@@ -114,13 +114,21 @@ ahora como bloque redondeado dentro del navbar-brand de Bootstrap
 
 .brand-personalizado {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 2px;
-    background-color: var(--verde-marca);
-    padding: 10px 16px;
-    border-radius: var(--radio);
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
     text-decoration: none;
+}
+
+/*
+logo (icono) junto al texto de la marca. alto fijo y ancho automatico para
+conservar la proporcion; el png ya viene con fondo transparente para verse
+sobre el fondo oscuro del navbar
+*/
+
+.logo-navbar {
+    height: 40px;
+    width: auto;
 }
 
 .brand-personalizado .titulo-principal {
@@ -174,11 +182,14 @@ apilarse debajo. la marca se achica un poco para entrar comoda en una linea
 
     .brand-personalizado {
         margin: 0 auto;
-        padding: 8px 12px;
     }
 
     .brand-personalizado .titulo-principal {
         font-size: 18px;
+    }
+
+    .logo-navbar {
+        height: 30px;
     }
 }
 
