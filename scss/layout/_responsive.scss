@@ -95,7 +95,12 @@
     .grid-contacto {
         grid-template-columns: 1fr 1fr;
     }
+}
 
+// --- Navbar desplegada (>= 1200px) ---
+// Recién a este ancho la navbar deja de ser hamburguesa; la marca crece
+// y se apoya a la izquierda (antes de 1200px va centrada, estilo mobile).
+@include responsive(navbar-expandido) {
     .brand-personalizado .titulo-principal {
         font-size: 34px;
     }

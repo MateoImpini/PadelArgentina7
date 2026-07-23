@@ -117,7 +117,7 @@ asi la marca queda centrada en TODO el ancho con margin:0 auto, en vez de
 apilarse debajo. la marca se achica un poco para entrar comoda en una linea
 */
 
-@media (max-width: 991.98px) {
+@media (max-width: 1199.98px) {
     .navbar-personalizado .container-fluid {
         position: relative;
     }
@@ -933,7 +933,9 @@ el menu vuelve a fila y el logo deja de ocupar el 100% del ancho
     .grid-contacto {
         grid-template-columns: 1fr 1fr;
     }
+}
 
+@media (min-width: 1200px) {
     .brand-personalizado .titulo-principal {
         font-size: 34px;
     }

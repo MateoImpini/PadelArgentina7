@@ -61,7 +61,11 @@ $transicion: 0.2s ease;
 $bp-tablet: 768px;
 $bp-desktop: 1024px;
 $bp-mobile-max: 767.98px;
-$bp-navbar-max: 991.98px;
+// La navbar colapsa (hamburguesa) por debajo de 1200px para que el iPad
+// también use el menú compacto, igual que en mobile. Coincide con el
+// breakpoint de Bootstrap navbar-expand-xl.
+$bp-navbar-max: 1199.98px;
+$bp-navbar-min: 1200px;
 
 // --- Tipografía ---
 $fuente-base: 'Roboto', sans-serif;

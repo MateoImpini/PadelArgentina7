@@ -30,6 +30,8 @@
         @media (max-width: $bp-mobile-max) { @content; }
     } @else if $punto == navbar {
         @media (max-width: $bp-navbar-max) { @content; }
+    } @else if $punto == navbar-expandido {
+        @media (min-width: $bp-navbar-min) { @content; }
     } @else {
         @error "Breakpoint desconocido: #{$punto}";
     }
