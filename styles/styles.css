@@ -999,9 +999,12 @@ se compactan padding, titulo, alto de imagen y se quitan las alturas minimas
         gap: 8px;
     }
 
+    /* altura fija para 2 lineas de titulo: asi las tarjetas con nombre corto
+       (1 linea) y largo (2 lineas) reservan el mismo alto y las imagenes de una
+       misma fila arrancan a la misma altura */
     .grid-productos .subtitulo {
         font-size: 17px;
-        min-height: 0;
+        min-height: 52px;
     }
 
     .grid-productos .tarjeta > .parrafo {
@@ -1021,6 +1024,13 @@ se compactan padding, titulo, alto de imagen y se quitan las alturas minimas
         max-width: 100%;
         object-fit: contain;
         object-position: center;
+    }
+
+    /* margin-top:auto empuja el bloque de precio (y lo que sigue) al fondo de la
+       tarjeta: como las tarjetas de una fila comparten alto, los precios quedan
+       alineados tengan o no el badge de descuento arriba */
+    .grid-productos .precio {
+        margin-top: auto;
     }
 
     /* en la tarjeta angosta, el precio tachado + el precio nuevo no entran en
