@@ -32,6 +32,10 @@
         @media (max-width: $bp-navbar-max) { @content; }
     } @else if $punto == navbar-expandido {
         @media (min-width: $bp-navbar-min) { @content; }
+    } @else if $punto == navbar-grande {
+        // Rango "iPad": la navbar está colapsada (hamburguesa) pero hay
+        // espacio de sobra, así que se agranda respecto al celular.
+        @media (min-width: $bp-tablet) and (max-width: $bp-navbar-max) { @content; }
     } @else {
         @error "Breakpoint desconocido: #{$punto}";
     }

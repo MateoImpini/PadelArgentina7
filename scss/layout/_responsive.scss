@@ -44,6 +44,28 @@
     }
 }
 
+// --- Navbar en iPad (768px – 1399.98px) ---
+// Sigue siendo hamburguesa, pero con más aire: barra más alta y marca/logo
+// más grandes para que no se vea tan fina como en el celular.
+@include responsive(navbar-grande) {
+    .navbar-personalizado {
+        padding: 18px 28px;
+
+        .navbar-toggler {
+            padding: 6px 12px;
+            font-size: 22px;
+        }
+    }
+
+    .brand-personalizado .titulo-principal {
+        font-size: 26px;
+    }
+
+    .logo-navbar {
+        height: 42px;
+    }
+}
+
 // --- Tablet (>= 768px) ---
 // La grilla de la home pasa a 2 columnas y el catálogo a 2 columnas.
 @include responsive(tablet) {

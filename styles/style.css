@@ -117,7 +117,7 @@ asi la marca queda centrada en TODO el ancho con margin:0 auto, en vez de
 apilarse debajo. la marca se achica un poco para entrar comoda en una linea
 */
 
-@media (max-width: 1199.98px) {
+@media (max-width: 1399.98px) {
     .navbar-personalizado .container-fluid {
         position: relative;
     }
@@ -148,6 +148,27 @@ apilarse debajo. la marca se achica un poco para entrar comoda en una linea
 
     .logo-navbar {
         height: 30px;
+    }
+}
+
+/* Navbar en iPad (768px - 1399.98px): hamburguesa pero mas alta y con
+   marca/logo mas grandes que en el celular */
+@media (min-width: 768px) and (max-width: 1399.98px) {
+    .navbar-personalizado {
+        padding: 18px 28px;
+    }
+
+    .navbar-personalizado .navbar-toggler {
+        padding: 6px 12px;
+        font-size: 22px;
+    }
+
+    .brand-personalizado .titulo-principal {
+        font-size: 26px;
+    }
+
+    .logo-navbar {
+        height: 42px;
     }
 }
 
@@ -935,7 +956,7 @@ el menu vuelve a fila y el logo deja de ocupar el 100% del ancho
     }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1400px) {
     .brand-personalizado .titulo-principal {
         font-size: 34px;
     }
