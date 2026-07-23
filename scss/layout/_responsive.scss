@@ -179,6 +179,13 @@
             margin-top: auto;
         }
 
+        // el botón no debe tener su propio margin-top:auto en mobile: si lo
+        // tiene, el espacio libre se reparte entre precio y botón y los
+        // precios se desalinean cuando un badge ocupa más líneas que otro.
+        .btn-detalle {
+            margin-top: 0;
+        }
+
         // El precio tachado se apila arriba del precio nuevo para no
         // desbordar la tarjeta angosta.
         .precio-anterior {
