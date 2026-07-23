@@ -29,4 +29,11 @@
     background-color: $acento-boton;
     color: $texto-sobre-acento;
     align-self: flex-start;
+    // Bootstrap pone white-space:nowrap en .badge; con textos largos
+    // ("20% OFF - ¡Oferta de temporada!") eso desborda la tarjeta angosta
+    // en mobile y genera scroll horizontal. Permitimos el salto de línea
+    // y limitamos el ancho al de la tarjeta.
+    white-space: normal;
+    max-width: 100%;
+    text-align: left;
 }
