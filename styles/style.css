@@ -1,1032 +1,648 @@
-/* ============================================================
-   style.css  —  ARCHIVO GENERADO por Sass. NO EDITAR A MANO.
-   Fuente: scss/main.scss  ->  sass scss/main.scss styles/style.css
-   ============================================================ */
-
 :root {
-    color-scheme: light;
+  color-scheme: light;
 }
-
-/*
-============================
-Variables de tema (paleta del sitio)
-============================
-centralizar los colores en :root evita repetir los mismos rgb() en decenas
-de reglas y permite ajustar toda la estetica desde un solo lugar
-*/
-
-
-/*
-reset global: sin esta regla, el padding/margin por defecto del navegador
-rompe los anchos calculados en los layouts flex
-*/
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-
-/*
-scroll suave al navegar con anclas dentro de la pagina
-*/
 
 html {
-    scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }
-
-/*
-color y fondo de la pagina.
-display:flex + min-height:100vh en columna: hace que el footer quede
-pegado abajo aunque la pagina tenga poco contenido (ver flex en .main-contenido)
-*/
 
 .cuerpo-pagina {
-    background-color: rgb(247, 247, 239);
-    font-family: 'Roboto', sans-serif;
-    font-size: 20px;
-    font-weight: 400;
-    line-height: 1.6;
-    color: rgb(31, 42, 31);
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    overflow-x: hidden;
+  background-color: rgb(247, 247, 239);
+  font-family: "Roboto", sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: rgb(31, 42, 31);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  overflow-x: hidden;
 }
-
-/*
-navbar de Bootstrap (navbar-expand-lg + navbar-dark) recoloreada con la
-paleta propia del sitio. navbar-dark se encarga del icono de hamburguesa
-en blanco; el color de fondo y de los links se pisa con estas reglas
-*/
-
-.navbar-personalizado {
-    background-color: rgb(30, 46, 30);
-    padding: 12px 20px;
-}
-
-/*
-placa del logo: mismo verde oscuro que usaba el header manual,
-ahora como bloque redondeado dentro del navbar-brand de Bootstrap
-*/
-
-.brand-personalizado {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 10px;
-    text-decoration: none;
-}
-
-/*
-logo (icono) junto al texto de la marca. alto fijo y ancho automatico para
-conservar la proporcion; el png ya viene con fondo transparente para verse
-sobre el fondo oscuro del navbar
-*/
-
-.logo-navbar {
-    height: 40px;
-    width: auto;
-}
-
-.brand-personalizado .titulo-principal {
-    font-size: 28px;
-}
-
-/*
-texto de los links en tonos claros para leerse sobre el fondo oscuro del navbar.
-especificidad igualada a las reglas .navbar-dark .navbar-nav .nav-link de
-Bootstrap para poder pisar sus colores por defecto
-*/
-
-.navbar-personalizado .navbar-nav .enlace-nav {
-    color: rgb(233, 241, 211);
-}
-
-.navbar-personalizado .navbar-nav .enlace-nav:hover,
-.navbar-personalizado .navbar-nav .enlace-nav:focus {
-    color: rgb(255, 255, 255);
-}
-
-/*
-navbar en mobile: imita el header de un e-commerce (boton hamburguesa a la
-izquierda y logo centrado, todo en una sola fila). se aplica por debajo del
-breakpoint del navbar-expand-lg (992px), donde el menu esta colapsado.
-el toggler se saca del flujo con position:absolute y se ancla a la izquierda;
-asi la marca queda centrada en TODO el ancho con margin:0 auto, en vez de
-apilarse debajo. la marca se achica un poco para entrar comoda en una linea
-*/
-
-@media (max-width: 1399.98px) {
-    .navbar-personalizado .container-fluid {
-        position: relative;
-    }
-
-    .navbar-personalizado .navbar-toggler {
-        position: absolute;
-        left: 12px;
-        /* anclado a top:0 (la fila del logo, que no se mueve) en vez de
-           top:50%: al abrir el menu el container-fluid crece hacia abajo y
-           un 50% mandaba la hamburguesa al medio del navbar expandido.
-           el boton y el logo tienen casi la misma altura, asi que quedan
-           alineados en la primera fila */
-        top: 0;
-        /* boton mas compacto: libera ancho para que el logo centrado no se
-           solape con la hamburguesa en pantallas angostas (~320px) */
-        padding: 4px 8px;
-        font-size: 18px;
-        z-index: 2;
-    }
-
-    .brand-personalizado {
-        margin: 0 auto;
-    }
-
-    .brand-personalizado .titulo-principal {
-        font-size: 18px;
-    }
-
-    .logo-navbar {
-        height: 30px;
-    }
-}
-
-/* Navbar en iPad (768px - 1399.98px): hamburguesa pero mas alta y con
-   marca/logo mas grandes que en el celular */
-@media (min-width: 768px) and (max-width: 1399.98px) {
-    .navbar-personalizado {
-        padding: 18px 28px;
-    }
-
-    .navbar-personalizado .navbar-toggler {
-        padding: 6px 12px;
-        font-size: 22px;
-    }
-
-    .brand-personalizado .titulo-principal {
-        font-size: 26px;
-    }
-
-    .logo-navbar {
-        height: 42px;
-    }
-}
-
-/*
-contenedor principal: secciones apiladas con separacion uniforme via gap.
-flex:1 0 auto empuja el footer hacia abajo cuando hay poco contenido.
-max-width + margin auto: en pantallas grandes el contenido no se estira
-de borde a borde y queda centrado y legible
-*/
 
 .main-contenido {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    padding: 20px;
-    flex: 1 0 auto;
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 20px;
+  flex: 1 0 auto;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
-
-/*
-hero de la home: banner de bienvenida a ancho completo. reemplaza la tarjeta
-de producto destacado (que se repetia identica en ofertas) para que el index
-tenga una portada propia. degradado en verdes de marca + CTA hacia el catalogo.
-mobile-first: padding y titulo mas chicos, se agrandan en tablet/desktop
-*/
-
-.hero {
-    background: linear-gradient(135deg, rgb(22, 34, 22), rgb(46, 94, 52));
-    padding: 40px 20px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-}
-
-.hero-contenido {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
-    max-width: 720px;
-    margin: 0 auto;
-    text-align: center;
-}
-
-/* linea superior breve, en mayusculas, sobre el titulo del hero */
-.hero-eyebrow {
-    color: rgb(233, 250, 158);
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-}
-
-.hero-titulo {
-    color: rgb(255, 255, 255);
-    font-size: 32px;
-    font-weight: 700;
-    line-height: 1.15;
-}
-
-.hero-texto {
-    color: rgb(233, 241, 211);
-    font-size: 18px;
-    font-weight: 400;
-    line-height: 1.6;
-}
-
-/* fila de botones del hero: envuelve en mobile si no entran en una linea */
-.hero-acciones {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 12px;
-    margin-top: 8px;
-}
-
-/* CTA principal: relleno lima que contrasta con el fondo verde */
-.hero-btn-primario {
-    background-color: rgb(233, 250, 158);
-    color: rgb(22, 34, 22);
-    font-weight: 700;
-    border: 2px solid rgb(233, 250, 158);
-    transition: background-color 0.2s ease, transform 0.2s ease;
-}
-
-.hero-btn-primario:hover,
-.hero-btn-primario:focus {
-    background-color: rgb(255, 255, 255);
-    border-color: rgb(255, 255, 255);
-    color: rgb(22, 34, 22);
-    transform: translateY(-2px);
-}
-
-/* CTA secundario: contorno lima sobre fondo transparente */
-.hero-btn-secundario {
-    background-color: transparent;
-    color: rgb(255, 255, 255);
-    border: 2px solid rgb(233, 250, 158);
-    transition: background-color 0.2s ease, color 0.2s ease;
-}
-
-.hero-btn-secundario:hover,
-.hero-btn-secundario:focus {
-    background-color: rgb(233, 250, 158);
-    color: rgb(22, 34, 22);
-}
-
-/*
-contenedor pequeño: cada articulo con aire interno propio.
-sombra sutil por defecto para dar profundidad; transition + hover
-suman un efecto de elevacion al pasar el mouse
-*/
-
-.tarjeta {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    padding: 20px;
-    background-color: rgb(233, 241, 211);
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.tarjeta:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-}
-
-/*
-grid maestro de la home: mobile-first, 1 columna apilada.
-grid-template-areas nombra cada seccion para reordenar el layout
-sin tocar el orden del HTML al cambiar de breakpoint
-*/
-
-.grid-secciones {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-areas:
-        "pagos"
-        "envios"
-        "atencion";
-    gap: 24px;
-}
-
-/*
-asignacion de cada seccion a su area nombrada (home)
-*/
-
-.seccion-pagos {
-    grid-area: pagos;
-}
-
-.seccion-envios {
-    grid-area: envios;
-}
-
-.seccion-atencion {
-    grid-area: atencion;
-}
-
-/*
-grid de catalogo de productos: mobile-first, 1 columna apilada,
-se abre a 2 y 3 columnas fluidas (fr) en los breakpoints siguientes
-*/
-
-.grid-productos {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 24px;
-}
-
-/*
-alineacion del catalogo: para que las fotos arranquen a la misma altura en
-todas las tarjetas, se reserva un alto minimo parejo al titulo (hasta 2 lineas)
-y a la descripcion (hasta 3 lineas). asi el bloque de texto superior mide igual
-en todas y la imagen queda alineada. la foto usa alto fijo + object-fit:contain
-para verse completa y del mismo tamaño en toda la grilla
-*/
-
-.grid-productos .subtitulo {
-    min-height: 84px;
-}
-
-.grid-productos .tarjeta > .parrafo {
-    min-height: 77px;
-}
-
-.grid-productos figure {
-    width: 100%;
-    align-items: center;
-    justify-content: center;
-}
-
-.grid-productos figure img {
-    width: 100%;
-    height: 260px;
-    object-fit: contain;
-    background-color: rgb(255, 255, 255);
-}
-
-/*
-grid de la pagina "sobre nosotros": mobile-first, 1 columna apilada,
-con areas nombradas igual que la home
-*/
-
-.grid-nosotros {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-areas:
-        "historia"
-        "mision"
-        "valores"
-        "equipo";
-    gap: 24px;
-}
-
-/*
-asignacion de cada seccion a su area nombrada (sobre nosotros)
-*/
-
-.seccion-historia {
-    grid-area: historia;
-}
-
-.seccion-mision {
-    grid-area: mision;
-}
-
-.seccion-valores {
-    grid-area: valores;
-}
-
-.seccion-equipo {
-    grid-area: equipo;
-}
-
-/*
-lista de valores de la empresa, sin viñetas por defecto del navegador
-*/
-
-.lista-valores {
-    list-style: disc;
-    padding-left: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-}
-
-/*
-footer: bloques distribuidos con flex y separacion via gap
-*/
-
-.pie-pagina {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 20px;
-    padding: 20px;
-    background-color: rgb(30, 46, 30);
-}
-
-/*
-texto en tonos claros para leerse sobre el fondo oscuro del footer
-*/
-
-.pie-pagina .titulo-footer {
-    color: rgb(255, 255, 255);
-}
-
-.pie-pagina .parrafo {
-    color: rgb(233, 241, 211);
-}
-
-.pie-pagina .enlace-nav {
-    color: rgb(233, 241, 211);
-}
-
-.pie-pagina .enlace-nav:hover {
-    color: rgb(255, 255, 255);
-}
-
-/*
-franja de copyright: tono mas suave que el resto del footer para
-diferenciarla como cierre de la pagina
-*/
-
-.footer-copyright {
-    background-color: rgb(44, 62, 44);
-    padding: 16px 20px;
-}
-
-.footer-copyright .parrafo {
-    color: rgb(233, 241, 211);
-}
-
-/*
-bloque de redes sociales del footer
-*/
-
-.redes-sociales {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.lista-redes {
-    display: flex;
-    gap: 16px;
-    list-style: none;
-}
-
-/*
-medios de pago y de envio: mismo patron que redes-sociales,
-los logos van en tarjetas blancas para que se lean sobre cualquier fondo
-*/
-
-.medios-pago,
-.medios-envio {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.lista-logos {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    list-style: none;
-}
-
-/*
-transform + transition: leve efecto de zoom al pasar el mouse sobre un logo
-*/
-
-.lista-logos li {
-    display: flex;
-    align-items: center;
-    background-color: rgb(255, 255, 255);
-    border-radius: 6px;
-    padding: 6px 10px;
-    transition: transform 0.2s ease;
-}
-
-.lista-logos li:hover {
-    transform: scale(1.06);
-}
-
-.lista-logos img {
-    display: block;
-    height: 24px;
-    width: auto;
-}
-
-/*
-color y fondo del titulo principal
-*/
 
 .titulo-principal {
-    color: rgb(255, 255, 255);
-    font-size: 50px;
-    font-weight: 700;
-    line-height: 1.2;
-    letter-spacing: 0.5px;
+  color: rgb(255, 255, 255);
+  font-size: 50px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.5px;
 }
-
-/*
-subtitulos de seccion. el pseudo-elemento ::after dibuja una linea de acento
-corta debajo del titulo para reforzarlo visualmente sin recargar
-*/
 
 .subtitulo {
-    color: rgb(46, 94, 52);
-    font-size: 30px;
-    font-weight: 700;
-    line-height: 1.25;
+  color: rgb(46, 94, 52);
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.25;
 }
-
 .subtitulo::after {
-    content: "";
-    display: block;
-    width: 48px;
-    height: 3px;
-    margin-top: 6px;
-    background-color: rgb(46, 94, 52);
-    border-radius: 2px;
+  content: "";
+  display: block;
+  width: 48px;
+  height: 3px;
+  margin-top: 6px;
+  background-color: rgb(46, 94, 52);
+  border-radius: 2px;
 }
-
-/*
-titulo de seccion (encabezado de un grupo de productos, ej: "Zapatillas de
-padel"): un poco mas grande que el titulo de una tarjeta y con aire debajo,
-para que se lea como cabecera de la seccion y no como un producto mas
-*/
 
 .titulo-seccion {
-    font-size: 34px;
-    margin-bottom: 4px;
+  font-size: 34px;
+  margin-bottom: 4px;
 }
-
-/*
-color para los titulos del footer
-*/
 
 .titulo-footer {
-    color: rgb(32, 12, 0);
-    font-size: 25px;
-    font-weight: 500;
+  color: rgb(32, 12, 0);
+  font-size: 25px;
+  font-weight: 500;
 }
-
-/*
-color de acento, complementario al fondo verde-amarillo, usado para resaltar enlaces y elementos interactivos
-*/
 
 .color-acento {
-    color: rgb(46, 94, 52);
+  color: rgb(46, 94, 52);
 }
 
-/*
-transition en color: el cambio de :hover y el de aria-current se ven
-suaves en vez de instantaneos
-*/
+.parrafo {
+  color: rgb(31, 42, 31);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.navbar-personalizado {
+  background-color: rgb(30, 46, 30);
+  padding: 12px 20px;
+}
+
+.brand-personalizado {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+.brand-personalizado .titulo-principal {
+  font-size: 28px;
+}
+
+.logo-navbar {
+  height: 40px;
+  width: auto;
+}
+
+.navbar-personalizado .navbar-nav .enlace-nav {
+  color: rgb(233, 241, 211);
+}
+.navbar-personalizado .navbar-nav .enlace-nav:hover, .navbar-personalizado .navbar-nav .enlace-nav:focus {
+  color: rgb(255, 255, 255);
+}
 
 .enlace-nav {
-    color: rgb(46, 94, 52);
-    font-weight: 500;
-    text-decoration: none;
-    transition: color 0.2s ease;
+  color: rgb(46, 94, 52);
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s ease;
 }
-
 .enlace-nav:hover {
-    color: rgb(35, 72, 38);
-    text-decoration: underline;
+  color: rgb(35, 72, 38);
+  text-decoration: underline;
 }
-
-/*
-marca visualmente el link de la pagina actual (aria-current="page" en el HTML)
-para reforzar la indicacion de posicion tanto visual como para lectores de pantalla
-*/
-
-.enlace-nav[aria-current="page"] {
-    text-decoration: underline;
-    font-weight: 700;
+.enlace-nav[aria-current=page] {
+  text-decoration: underline;
+  font-weight: 700;
 }
-
-/*
-accesibilidad: contorno visible al navegar con teclado (Tab) sobre enlaces
-y botones, sin afectar el click con el mouse (:focus-visible)
-*/
 
 .enlace-nav:focus-visible,
 .btn-detalle:focus-visible,
 .hero-acciones .btn:focus-visible {
-    outline: 3px solid rgb(46, 94, 52);
-    outline-offset: 2px;
-    border-radius: 4px;
+  outline: 3px solid rgb(46, 94, 52);
+  outline-offset: 2px;
+  border-radius: 4px;
 }
 
-/*
-figure en columna para que el figcaption quede siempre debajo de la imagen
-*/
+.grid-secciones {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas: "pagos" "envios" "atencion";
+  gap: 24px;
+}
+
+.seccion-pagos {
+  grid-area: pagos;
+}
+
+.seccion-envios {
+  grid-area: envios;
+}
+
+.seccion-atencion {
+  grid-area: atencion;
+}
+
+.grid-productos {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+.grid-productos .subtitulo {
+  min-height: 84px;
+}
+.grid-productos .tarjeta > .parrafo {
+  min-height: 77px;
+}
+.grid-productos figure {
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+.grid-productos figure img {
+  width: 100%;
+  height: 260px;
+  object-fit: contain;
+  background-color: rgb(255, 255, 255);
+}
+
+.grid-nosotros {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas: "historia" "mision" "valores" "equipo";
+  gap: 24px;
+}
+
+.seccion-historia {
+  grid-area: historia;
+}
+
+.seccion-mision {
+  grid-area: mision;
+}
+
+.seccion-valores {
+  grid-area: valores;
+}
+
+.seccion-equipo {
+  grid-area: equipo;
+}
+
+.lista-valores {
+  list-style: disc;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.grid-contacto {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+.pie-pagina {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+  background-color: rgb(30, 46, 30);
+}
+.pie-pagina .titulo-footer {
+  color: rgb(255, 255, 255);
+}
+.pie-pagina .parrafo {
+  color: rgb(233, 241, 211);
+}
+.pie-pagina .enlace-nav {
+  color: rgb(233, 241, 211);
+}
+.pie-pagina .enlace-nav:hover {
+  color: rgb(255, 255, 255);
+}
+
+.footer-copyright {
+  background-color: rgb(44, 62, 44);
+  padding: 16px 20px;
+}
+.footer-copyright .parrafo {
+  color: rgb(233, 241, 211);
+}
+
+.redes-sociales {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.lista-redes {
+  display: flex;
+  gap: 16px;
+  list-style: none;
+}
+
+.medios-pago,
+.medios-envio {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.lista-logos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  list-style: none;
+}
+.lista-logos li {
+  display: flex;
+  align-items: center;
+  background-color: rgb(255, 255, 255);
+  border-radius: 6px;
+  padding: 6px 10px;
+  transition: transform 0.2s ease;
+}
+.lista-logos li:hover {
+  transform: scale(1.06);
+}
+.lista-logos img {
+  display: block;
+  height: 24px;
+  width: auto;
+}
+
+.hero {
+  background: linear-gradient(135deg, rgb(22, 34, 22), rgb(46, 94, 52));
+  padding: 40px 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.hero-contenido {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.hero-eyebrow {
+  color: rgb(233, 250, 158);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.hero-titulo {
+  color: rgb(255, 255, 255);
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.hero-texto {
+  color: rgb(233, 241, 211);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.hero-acciones {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.hero-btn-primario {
+  background-color: rgb(233, 250, 158);
+  color: rgb(22, 34, 22);
+  font-weight: 700;
+  border: 2px solid rgb(233, 250, 158);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+.hero-btn-primario:hover, .hero-btn-primario:focus {
+  background-color: rgb(255, 255, 255);
+  border-color: rgb(255, 255, 255);
+  color: rgb(22, 34, 22);
+  transform: translateY(-2px);
+}
+
+.hero-btn-secundario {
+  background-color: transparent;
+  color: rgb(255, 255, 255);
+  border: 2px solid rgb(233, 250, 158);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.hero-btn-secundario:hover, .hero-btn-secundario:focus {
+  background-color: rgb(233, 250, 158);
+  color: rgb(22, 34, 22);
+}
+
+.tarjeta {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px;
+  background-color: rgb(233, 241, 211);
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.tarjeta:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
 
 figure {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
 }
-
-/*
-overflow:hidden recorta el zoom de la imagen al pasar el mouse (ver :hover)
-para que el efecto quede contenido dentro del marco redondeado
-*/
 
 .tarjeta figure {
-    overflow: hidden;
-    border-radius: 8px;
+  overflow: hidden;
+  border-radius: 8px;
 }
-
-/*
-object-fit:cover recorta las fotos rectangulares (como las de accesorios)
-al cuadrado de 300x300 sin deformarlas.
-transform + transition: leve zoom al pasar el mouse sobre la tarjeta
-*/
-
 .tarjeta figure img {
-    object-fit: cover;
-    border-radius: 8px;
-    max-width: 100%;
-    transition: transform 0.3s ease;
+  object-fit: cover;
+  border-radius: 8px;
+  max-width: 100%;
+  transition: transform 0.3s ease;
 }
-
 .tarjeta:hover figure img {
-    transform: scale(1.05);
+  transform: scale(1.05);
 }
-
-/*
-clase para diferenciar el texto destacado de la paleta pro
-*/
 
 .texto-paleta-pro {
-    display: inline-block;
-    color: rgb(31, 42, 31);
-    font-size: 20px;
-    font-weight: 500;
-    background-color: rgb(233, 241, 211);
-    border-left: 4px solid rgb(46, 94, 52);
-    padding: 4px 8px;
+  display: inline-block;
+  color: rgb(31, 42, 31);
+  font-size: 20px;
+  font-weight: 500;
+  background-color: rgb(233, 241, 211);
+  border-left: 4px solid rgb(46, 94, 52);
+  padding: 4px 8px;
 }
 
-/*
-precio y cuotas de un producto
-*/
-
 .precio {
-    color: rgb(46, 94, 52);
-    font-size: 22px;
-    font-weight: 700;
+  color: rgb(46, 94, 52);
+  font-size: 22px;
+  font-weight: 700;
 }
 
 .cuotas {
-    color: rgb(91, 107, 79);
-    font-size: 14px;
-    font-weight: 400;
+  color: rgb(91, 107, 79);
+  font-size: 14px;
+  font-weight: 400;
 }
-
-/*
-precio anterior de un producto en oferta: tachado y en gris para que
-el precio con descuento se lleve la atencion
-*/
 
 .precio-anterior {
-    color: rgb(130, 135, 120);
-    font-size: 16px;
-    font-weight: 400;
-    text-decoration: line-through;
-    margin-right: 6px;
+  color: rgb(130, 135, 120);
+  font-size: 16px;
+  font-weight: 400;
+  text-decoration: line-through;
+  margin-right: 6px;
 }
-
-/*
-etiqueta de descuento (badge de Bootstrap) recoloreada con el marron
-de acento del sitio
-*/
-
-.badge-descuento {
-    background-color: rgb(46, 94, 52);
-    color: rgb(255, 254, 254);
-    align-self: flex-start;
-    white-space: normal;
-    max-width: 100%;
-    text-align: left;
-}
-
-/*
-clase para los parrafos generales
-*/
-
-.parrafo {
-    color: rgb(31, 42, 31);
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 1.6;
-}
-
-/*
-galeria (carousel de Bootstrap): fondo blanco e imagen contenida
-para que las fotos de producto (fondo blanco/transparente) no se recorten
-*/
 
 .seccion-galeria .tarjeta {
-    padding-bottom: 8px;
+  padding-bottom: 8px;
 }
 
 .carousel-personalizado .carousel-item img {
-    height: 380px;
-    width: 100%;
-    object-fit: contain;
-    background-color: rgb(233, 241, 211);
-    border-radius: 8px;
+  height: 380px;
+  width: 100%;
+  object-fit: contain;
+  background-color: rgb(233, 241, 211);
+  border-radius: 8px;
 }
-
 .carousel-personalizado .carousel-caption {
-    background-color: rgba(40, 56, 38, 0.75);
-    border-radius: 8px;
-    bottom: 24px;
+  background-color: rgba(40, 56, 38, 0.75);
+  border-radius: 8px;
+  bottom: 24px;
 }
-
 .carousel-personalizado .carousel-control-prev-icon,
 .carousel-personalizado .carousel-control-next-icon {
-    background-color: rgb(30, 46, 30);
-    border-radius: 50%;
-    padding: 18px;
+  background-color: rgb(30, 46, 30);
+  border-radius: 50%;
+  padding: 18px;
 }
-
 .carousel-personalizado .carousel-indicators [data-bs-target] {
-    background-color: rgb(46, 94, 52);
+  background-color: rgb(46, 94, 52);
 }
-
-/*
-boton para abrir el modal de detalle de un producto (Bootstrap modal).
-transform en :hover: leve elevacion que acompaña el cambio de color
-*/
 
 .btn-detalle {
-    align-self: flex-start;
-    /* margin-top:auto empuja el boton al fondo de la tarjeta: como las
-       tarjetas de una fila comparten altura, todos los botones se alinean */
-    margin-top: auto;
-    background-color: rgb(46, 94, 52);
-    color: rgb(255, 254, 254);
-    border: none;
-    transition: background-color 0.2s ease, transform 0.2s ease;
+  align-self: flex-start;
+  margin-top: auto;
+  background-color: rgb(46, 94, 52);
+  color: rgb(255, 254, 254);
+  border: none;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+.btn-detalle:hover, .btn-detalle:focus {
+  background-color: rgb(35, 72, 38);
+  color: rgb(255, 254, 254);
+  transform: translateY(-2px);
 }
 
-.btn-detalle:hover,
-.btn-detalle:focus {
-    background-color: rgb(35, 72, 38);
-    color: rgb(255, 254, 254);
-    transform: translateY(-2px);
+.badge-descuento {
+  background-color: rgb(46, 94, 52);
+  color: rgb(255, 254, 254);
+  align-self: flex-start;
+  white-space: normal;
+  max-width: 100%;
+  text-align: left;
 }
-
-/*
-modal de detalle de producto: mismos colores de tarjeta/subtitulo del sitio
-*/
 
 .modal-personalizado {
-    background-color: rgb(233, 241, 211);
-    border-radius: 8px;
+  background-color: rgb(233, 241, 211);
+  border-radius: 8px;
 }
-
 .modal-personalizado .modal-header,
 .modal-personalizado .modal-footer {
-    border-color: rgba(80, 64, 46, 0.25);
+  border-color: rgba(80, 64, 46, 0.25);
 }
-
 .modal-personalizado .modal-title {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
-
-/*
-el subtitulo dentro del modal no lleva la linea de acento inferior
-*/
-
 .modal-personalizado .modal-title.subtitulo::after {
-    display: none;
+  display: none;
 }
-
-/*
-grilla de la pagina de contacto: mobile-first, 1 columna apilada
-(datos arriba, formulario abajo). se abre a 2 columnas en desktop
-*/
-
-.grid-contacto {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 24px;
-}
-
-/*
-lista de datos de contacto: cada item con su icono y el texto alineados
-*/
 
 .lista-datos-contacto {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  list-style: none;
 }
-
 .lista-datos-contacto li {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    /* min-width:0 permite que el item flex se achique por debajo del ancho
-       de su contenido; sin esto, un texto largo sin espacios (el email)
-       fuerza la columna a ensancharse y genera scroll horizontal en mobile */
-    min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
 }
-
-/*
-overflow-wrap:anywhere corta las palabras largas sin espacios (como el email)
-cuando no entran en el ancho disponible, en vez de desbordar la tarjeta
-*/
-
 .lista-datos-contacto li .parrafo,
 .lista-datos-contacto li .enlace-nav {
-    min-width: 0;
-    overflow-wrap: anywhere;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .dato-icono {
-    font-size: 22px;
-    line-height: 1;
+  font-size: 22px;
+  line-height: 1;
 }
 
-/*
-formulario de contacto (campos de Bootstrap) recoloreado con la paleta.
-el :focus pisa el celeste por defecto de Bootstrap con el verde de acento
-*/
-
 .formulario-contacto .form-label {
-    color: rgb(31, 42, 31);
-    font-weight: 500;
+  color: rgb(31, 42, 31);
+  font-weight: 500;
 }
 
 .campo-formulario {
-    background-color: rgb(255, 255, 255);
-    border: 1px solid rgba(80, 64, 46, 0.25);
-    color: rgb(31, 42, 31);
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgba(80, 64, 46, 0.25);
+  color: rgb(31, 42, 31);
 }
-
 .campo-formulario:focus {
-    background-color: rgb(255, 255, 255);
-    border-color: rgb(46, 94, 52);
-    box-shadow: 0 0 0 0.2rem rgba(46, 94, 52, 0.25);
-    color: rgb(31, 42, 31);
+  background-color: rgb(255, 255, 255);
+  border-color: rgb(46, 94, 52);
+  box-shadow: 0 0 0 0.2rem rgba(46, 94, 52, 0.25);
+  color: rgb(31, 42, 31);
 }
-
 .campo-formulario::placeholder {
-    color: rgb(130, 135, 120);
+  color: rgb(130, 135, 120);
 }
 
-/*
-============================
-Escalera responsiva (mobile-first)
-============================
-*/
-
-/*
-tablet: la grilla de la home pasa a 2 columnas y el catalogo a 2 columnas
-*/
-
+@media (max-width: 1399.98px) {
+  .navbar-personalizado .container-fluid {
+    position: relative;
+  }
+  .navbar-personalizado .navbar-toggler {
+    position: absolute;
+    left: 12px;
+    top: 0;
+    padding: 4px 8px;
+    font-size: 18px;
+    z-index: 2;
+  }
+  .brand-personalizado {
+    margin: 0 auto;
+  }
+  .brand-personalizado .titulo-principal {
+    font-size: 18px;
+  }
+  .logo-navbar {
+    height: 30px;
+  }
+}
+@media (min-width: 768px) and (max-width: 1399.98px) {
+  .navbar-personalizado {
+    padding: 18px 28px;
+  }
+  .navbar-personalizado .navbar-toggler {
+    padding: 6px 12px;
+    font-size: 22px;
+  }
+  .brand-personalizado .titulo-principal {
+    font-size: 26px;
+  }
+  .logo-navbar {
+    height: 42px;
+  }
+}
 @media (min-width: 768px) {
-    .hero {
-        padding: 60px 24px;
-    }
-
-    .hero-titulo {
-        font-size: 46px;
-    }
-
-    .grid-secciones {
-        grid-template-columns: 1fr 1fr;
-        grid-template-areas:
-            "pagos envios"
-            "atencion atencion";
-    }
-
-    .grid-productos {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .grid-nosotros {
-        grid-template-columns: 1fr 1fr;
-        grid-template-areas:
-            "historia historia"
-            "mision valores"
-            "equipo equipo";
-    }
+  .hero {
+    padding: 60px 24px;
+  }
+  .hero-titulo {
+    font-size: 46px;
+  }
+  .grid-secciones {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "pagos envios" "atencion atencion";
+  }
+  .grid-productos {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .grid-nosotros {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "historia historia" "mision valores" "equipo equipo";
+  }
 }
-
-/*
-desktop: la grilla de la home pasa a 3 columnas (destacado ocupa todo el ancho
-superior), el catalogo de productos muestra 3 columnas y "sobre nosotros" 4.
-el menu vuelve a fila y el logo deja de ocupar el 100% del ancho
-*/
-
 @media (min-width: 1024px) {
-    .grid-secciones {
-        grid-template-columns: repeat(3, 1fr);
-        grid-template-areas: "pagos envios atencion";
-    }
-
-    .grid-productos {
-        grid-template-columns: repeat(3, 1fr);
-    }
-
-    .grid-nosotros {
-        grid-template-columns: repeat(4, 1fr);
-        grid-template-areas: "historia mision valores equipo";
-    }
-
-    .grid-contacto {
-        grid-template-columns: 1fr 1fr;
-    }
+  .grid-secciones {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-areas: "pagos envios atencion";
+  }
+  .grid-productos {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .grid-nosotros {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-areas: "historia mision valores equipo";
+  }
+  .grid-contacto {
+    grid-template-columns: 1fr 1fr;
+  }
 }
-
 @media (min-width: 1400px) {
-    .brand-personalizado .titulo-principal {
-        font-size: 34px;
-    }
+  .brand-personalizado .titulo-principal {
+    font-size: 34px;
+  }
 }
-
-/*
-mobile (<768px): el catalogo de productos pasa a 2 columnas (estilo tienda),
-en vez de una sola tarjeta ancha por fila. como cada tarjeta queda angosta,
-se compactan padding, titulo, alto de imagen y se quitan las alturas minimas
-(pensadas para alinear filas en desktop) para que no queden tarjetas enormes
-*/
-
 @media (max-width: 767.98px) {
-    .grid-productos {
-        /* minmax(0, 1fr) en vez de 1fr: permite que las columnas bajen de su
-           contenido minimo y queden exactamente iguales (con 1fr, un texto o
-           precio largo ensancha una columna y descuadra el grid) */
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 12px;
-    }
-
-    .grid-productos .tarjeta {
-        padding: 12px;
-        gap: 8px;
-    }
-
-    /* altura fija para 2 lineas de titulo: asi las tarjetas con nombre corto
-       (1 linea) y largo (2 lineas) reservan el mismo alto y las imagenes de una
-       misma fila arrancan a la misma altura */
-    .grid-productos .subtitulo {
-        font-size: 17px;
-        min-height: 52px;
-    }
-
-    .grid-productos .tarjeta > .parrafo {
-        min-height: 0;
-    }
-
-    .grid-productos figure {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        height: 150px;
-    }
-
-    .grid-productos figure img {
-        max-height: 150px;
-        max-width: 100%;
-        object-fit: contain;
-        object-position: center;
-    }
-
-    /* margin-top:auto empuja el bloque de precio (y lo que sigue) al fondo de la
-       tarjeta: como las tarjetas de una fila comparten alto, los precios quedan
-       alineados tengan o no el badge de descuento arriba */
-    .grid-productos .precio {
-        margin-top: auto;
-    }
-
-    /* en la tarjeta angosta, el precio tachado + el precio nuevo no entran en
-       una linea: se apila el anterior arriba para que no desborde */
-    .grid-productos .precio-anterior {
-        display: block;
-        margin-right: 0;
-    }
-
-    /* en mobile, esconder la descripcion de cada producto: solo aparece en el
-       modal de "Ver detalle" al hacer click */
-    .grid-productos .tarjeta > .parrafo {
-        display: none;
-    }
+  .grid-productos {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+  .grid-productos .tarjeta {
+    padding: 12px;
+    gap: 8px;
+  }
+  .grid-productos .subtitulo {
+    font-size: 17px;
+    min-height: 52px;
+  }
+  .grid-productos .tarjeta > .parrafo {
+    min-height: 0;
+    display: none;
+  }
+  .grid-productos figure {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 150px;
+  }
+  .grid-productos figure img {
+    max-height: 150px;
+    max-width: 100%;
+    object-fit: contain;
+    object-position: center;
+  }
+  .grid-productos .precio {
+    margin-top: auto;
+  }
+  .grid-productos .btn-detalle {
+    margin-top: 0;
+  }
+  .grid-productos .precio-anterior {
+    display: block;
+    margin-right: 0;
+  }
 }
