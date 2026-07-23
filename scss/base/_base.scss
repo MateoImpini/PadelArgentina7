@@ -36,6 +36,9 @@ html {
     color: $texto-principal;
     @include flex-columna;
     min-height: 100vh;
+    // Red de seguridad: ningún contenido puntual debe generar scroll
+    // horizontal (que en iPad/mobile "corre" la página y la navbar).
+    overflow-x: hidden;
 }
 
 // Contenedor principal: secciones apiladas con separación uniforme.

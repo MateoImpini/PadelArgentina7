@@ -51,6 +51,7 @@ pegado abajo aunque la pagina tenga poco contenido (ver flex en .main-contenido)
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    overflow-x: hidden;
 }
 
 /*
@@ -695,6 +696,9 @@ de acento del sitio
     background-color: rgb(46, 94, 52);
     color: rgb(255, 254, 254);
     align-self: flex-start;
+    white-space: normal;
+    max-width: 100%;
+    text-align: left;
 }
 
 /*
