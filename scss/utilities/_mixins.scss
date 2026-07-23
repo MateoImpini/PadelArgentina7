@@ -1,0 +1,36 @@
+// ============================================================
+//  utilities/_mixins.scss
+//  Mixins reutilizables. Un mixin agrupa un bloque de CSS que se
+//  repite en varios lugares y se inyecta con @include, evitando
+//  copiar y pegar las mismas declaraciones.
+// ============================================================
+
+@use 'variables' as *;
+
+// Columna flex con separación uniforme. Se usa en tarjetas, footer,
+// listas y hero, que comparten el patrón "apilar en columna con gap".
+@mixin flex-columna($gap: 0) {
+    display: flex;
+    flex-direction: column;
+
+    @if $gap != 0 {
+        gap: $gap;
+    }
+}
+
+// Media query por nombre de breakpoint. Centraliza los puntos de
+// quiebre para no repetir los valores en px por todo el proyecto:
+//   @include responsive(tablet) { ... }
+@mixin responsive($punto) {
+    @if $punto == tablet {
+        @media (min-width: $bp-tablet) { @content; }
+    } @else if $punto == desktop {
+        @media (min-width: $bp-desktop) { @content; }
+    } @else if $punto == mobile {
+        @media (max-width: $bp-mobile-max) { @content; }
+    } @else if $punto == navbar {
+        @media (max-width: $bp-navbar-max) { @content; }
+    } @else {
+        @error "Breakpoint desconocido: #{$punto}";
+    }
+}

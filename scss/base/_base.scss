@@ -1,0 +1,52 @@
+// ============================================================
+//  base/_base.scss
+//  Estilos globales a etiquetas: reset, html, body y el contenedor
+//  principal de la página.
+// ============================================================
+
+@use '../utilities/variables' as *;
+@use '../utilities/mixins' as *;
+
+:root {
+    color-scheme: light;
+}
+
+// Reset global: sin esta regla, el padding/margin por defecto del
+// navegador rompe los anchos calculados en los layouts flex.
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+// Scroll suave al navegar con anclas dentro de la página.
+html {
+    scroll-behavior: smooth;
+}
+
+// Color y fondo de la página. display:flex + min-height:100vh en
+// columna hace que el footer quede pegado abajo aunque la página
+// tenga poco contenido (ver flex:1 en .main-contenido).
+.cuerpo-pagina {
+    background-color: $fondo-pagina;
+    font-family: $fuente-base;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.6;
+    color: $texto-principal;
+    @include flex-columna;
+    min-height: 100vh;
+}
+
+// Contenedor principal: secciones apiladas con separación uniforme.
+// flex:1 0 auto empuja el footer hacia abajo cuando hay poco contenido.
+// max-width + margin auto: en pantallas grandes el contenido no se
+// estira de borde a borde y queda centrado y legible.
+.main-contenido {
+    @include flex-columna(24px);
+    padding: 20px;
+    flex: 1 0 auto;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}

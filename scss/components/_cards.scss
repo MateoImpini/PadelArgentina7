@@ -1,0 +1,94 @@
+// ============================================================
+//  components/_cards.scss
+//  Tarjetas de producto/contenido y sus piezas internas: imagen,
+//  figcaption destacado, precios y cuotas.
+// ============================================================
+
+@use '../utilities/variables' as *;
+@use '../utilities/mixins' as *;
+
+// Cada artículo con aire interno propio. Sombra sutil por defecto;
+// transition + hover suman un efecto de elevación al pasar el mouse.
+.tarjeta {
+    @include flex-columna(12px);
+    padding: 20px;
+    background-color: $fondo-tarjeta;
+    border-radius: $radio;
+    box-shadow: $sombra-tarjeta;
+    transition: transform $transicion, box-shadow $transicion;
+
+    &:hover {
+        transform: translateY(-4px);
+        box-shadow: $sombra-tarjeta-hover;
+    }
+}
+
+// figure en columna para que el figcaption quede debajo de la imagen.
+figure {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.tarjeta {
+    figure {
+        // overflow:hidden contiene el zoom de la imagen (ver :hover)
+        // dentro del marco redondeado.
+        overflow: hidden;
+        border-radius: $radio;
+
+        // object-fit:cover recorta las fotos rectangulares al cuadrado
+        // sin deformarlas.
+        img {
+            object-fit: cover;
+            border-radius: $radio;
+            max-width: 100%;
+            transition: transform 0.3s ease;
+        }
+    }
+
+    &:hover figure img {
+        transform: scale(1.05);
+    }
+}
+
+// Texto destacado bajo la imagen (figcaption de la paleta destacada).
+.texto-paleta-pro {
+    display: inline-block;
+    color: $texto-principal;
+    font-size: 20px;
+    font-weight: 500;
+    background-color: $fondo-tarjeta;
+    border-left: 4px solid $acento;
+    padding: 4px 8px;
+}
+
+// Precio y cuotas de un producto.
+.precio {
+    color: $acento;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.cuotas {
+    color: $texto-secundario;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+// Precio anterior de un producto en oferta: tachado y en gris para
+// que el precio con descuento se lleve la atención.
+.precio-anterior {
+    color: $texto-tenue;
+    font-size: 16px;
+    font-weight: 400;
+    text-decoration: line-through;
+    margin-right: 6px;
+}
+
+// Galería (carousel): la tarjeta contenedora con un poco menos de
+// padding inferior.
+.seccion-galeria .tarjeta {
+    padding-bottom: 8px;
+}

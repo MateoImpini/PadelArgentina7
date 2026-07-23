@@ -1,0 +1,13 @@
+{
+  "name": "padel-argentina",
+  "version": "1.0.0",
+  "description": "Sitio web estático de venta de paletas y artículos de pádel. Estilos con arquitectura SCSS.",
+  "scripts": {
+    "build:css": "sass scss/main.scss styles/style.css --no-source-map",
+    "watch:css": "sass --watch scss/main.scss styles/style.css --no-source-map"
+  },
+  "devDependencies": {
+    "sass": "^1.77.0"
+  },
+  "license": "MIT"
+}

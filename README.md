@@ -10,7 +10,9 @@ Proyecto del curso de Desarrollo Web de Coderhouse (Módulos 1 al 5).
 ## Tecnologías
 
 - HTML5 semántico
-- CSS3 (variables, Flexbox y CSS Grid) con estilos personalizados
+- **Sass (SCSS)**: arquitectura de partials con `@use`, variables, mixins,
+  nesting y el operador `&`
+- CSS3 (Flexbox y CSS Grid), compilado desde SCSS
 - [Bootstrap 5.3](https://getbootstrap.com/) (navbar, carousel y modales)
 - Google Fonts (Roboto)
 
@@ -24,10 +26,60 @@ padel-argentina/
 │   ├── productos.html          # Catálogo de paletas y accesorios
 │   ├── sobrenosotros.html      # Información sobre la empresa
 │   └── contactos.html          # Datos de contacto
+├── scss/                       # Código fuente de estilos (Sass)
+│   ├── main.scss               # Único punto de entrada (@use)
+│   ├── utilities/
+│   │   ├── _variables.scss     # Paleta, tokens y breakpoints ($)
+│   │   └── _mixins.scss        # Mixins (flex-columna, responsive)
+│   ├── base/
+│   │   ├── _base.scss          # Reset y estilos globales a etiquetas
+│   │   └── _tipografia.scss    # Jerarquía de títulos y textos
+│   ├── layout/
+│   │   ├── _header.scss        # Navbar y marca
+│   │   ├── _nav.scss           # Enlaces de navegación y foco
+│   │   ├── _grid.scss          # Grillas (home, catálogo, nosotros, contacto)
+│   │   ├── _footer.scss        # Pie de página
+│   │   └── _responsive.scss    # Escalera responsiva (media queries)
+│   └── components/
+│       ├── _hero.scss          # Portada de la home
+│       ├── _cards.scss         # Tarjetas de producto
+│       ├── _buttons.scss       # Botón de detalle y badge de descuento
+│       ├── _carousel.scss      # Carousel de Bootstrap
+│       ├── _modal.scss         # Modal de detalle
+│       └── _forms.scss         # Formulario y datos de contacto
 ├── styles/
-│   └── styles.css              # Estilos del sitio (paleta + responsive)
+│   └── style.css               # CSS COMPILADO (generado por Sass, no editar)
 ├── imagenes/                   # Recursos gráficos
 └── README.md
+```
+
+## Estilos: arquitectura SCSS
+
+Todo el diseño nace de archivos `.scss` bajo `scss/`. El archivo
+`styles/style.css` es **solo el resultado de la compilación** (no se edita a
+mano). El punto de entrada es `scss/main.scss`, que orquesta los partials con
+`@use`. Los valores repetidos (colores, medidas, breakpoints) se definen una
+sola vez en `scss/utilities/_variables.scss` y se reutilizan en todo el proyecto.
+
+### Compilar los estilos
+
+Requiere [Sass](https://sass-lang.com/install). Con la CLI de Dart Sass
+(no necesita Node) o con el paquete npm:
+
+```bash
+# Compilación única
+sass scss/main.scss styles/style.css
+
+# Modo watch (recompila al guardar)
+sass --watch scss/main.scss styles/style.css
+```
+
+Si tenés Node instalado, también podés usar los scripts del `package.json`:
+
+```bash
+npm install
+npm run build:css      # compila una vez
+npm run watch:css      # modo watch
 ```
 
 ## Responsividad

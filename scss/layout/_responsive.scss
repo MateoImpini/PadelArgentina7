@@ -1,0 +1,162 @@
+// ============================================================
+//  layout/_responsive.scss
+//  Escalera responsiva (mobile-first). Se centraliza acá y se carga
+//  al final en main.scss para que estos overrides ganen sobre las
+//  reglas base sin depender de la especificidad. Usa el mixin
+//  responsive() de utilities/_mixins.
+// ============================================================
+
+@use '../utilities/variables' as *;
+@use '../utilities/mixins' as *;
+
+// --- Navbar en mobile/tablet (< 992px) ---
+// Imita el header de un e-commerce: hamburguesa a la izquierda y
+// marca centrada, todo en una fila.
+@include responsive(navbar) {
+    .navbar-personalizado {
+        .container-fluid {
+            position: relative;
+        }
+
+        // El toggler se saca del flujo y se ancla a top:0 (la fila del
+        // logo, que no se mueve) para que no se vaya al medio del
+        // navbar cuando el menú se expande.
+        .navbar-toggler {
+            position: absolute;
+            left: 12px;
+            top: 0;
+            padding: 4px 8px;
+            font-size: 18px;
+            z-index: 2;
+        }
+    }
+
+    .brand-personalizado {
+        margin: 0 auto;
+
+        .titulo-principal {
+            font-size: 18px;
+        }
+    }
+
+    .logo-navbar {
+        height: 30px;
+    }
+}
+
+// --- Tablet (>= 768px) ---
+// La grilla de la home pasa a 2 columnas y el catálogo a 2 columnas.
+@include responsive(tablet) {
+    .hero {
+        padding: 60px 24px;
+    }
+
+    .hero-titulo {
+        font-size: 46px;
+    }
+
+    .grid-secciones {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+            "pagos envios"
+            "atencion atencion";
+    }
+
+    .grid-productos {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .grid-nosotros {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+            "historia historia"
+            "mision valores"
+            "equipo equipo";
+    }
+}
+
+// --- Desktop (>= 1024px) ---
+// Home a 3 columnas, catálogo a 3, "sobre nosotros" a 4 y contacto a 2.
+@include responsive(desktop) {
+    .grid-secciones {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-areas: "pagos envios atencion";
+    }
+
+    .grid-productos {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .grid-nosotros {
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-areas: "historia mision valores equipo";
+    }
+
+    .grid-contacto {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .brand-personalizado .titulo-principal {
+        font-size: 34px;
+    }
+}
+
+// --- Mobile (< 768px) ---
+// El catálogo pasa a 2 columnas estilo tienda. Como cada tarjeta queda
+// angosta, se compacta el espaciado, se fija el alto de imagen y se
+// oculta la descripción (solo visible en el modal "Ver detalle").
+@include responsive(mobile) {
+    .grid-productos {
+        // minmax(0, 1fr) permite que las columnas bajen de su contenido
+        // mínimo y queden exactamente iguales.
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+
+        .tarjeta {
+            padding: 12px;
+            gap: 8px;
+        }
+
+        // Alto fijo de 2 líneas de título: así las tarjetas con nombre
+        // corto y largo reservan el mismo alto y las imágenes de una
+        // fila arrancan a la misma altura.
+        .subtitulo {
+            font-size: 17px;
+            min-height: 52px;
+        }
+
+        // Se oculta la descripción en mobile: solo aparece en el modal.
+        .tarjeta > .parrafo {
+            min-height: 0;
+            display: none;
+        }
+
+        figure {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 150px;
+
+            img {
+                max-height: 150px;
+                max-width: 100%;
+                object-fit: contain;
+                object-position: center;
+            }
+        }
+
+        // margin-top:auto ancla el bloque de precio al fondo: los precios
+        // quedan alineados tengan o no el badge de descuento arriba.
+        .precio {
+            margin-top: auto;
+        }
+
+        // El precio tachado se apila arriba del precio nuevo para no
+        // desbordar la tarjeta angosta.
+        .precio-anterior {
+            display: block;
+            margin-right: 0;
+        }
+    }
+}

@@ -1,0 +1,91 @@
+// ============================================================
+//  layout/_grid.scss
+//  Grillas del sitio (mobile-first, 1 columna). Las aperturas a
+//  2/3/4 columnas por breakpoint viven en layout/_responsive.scss.
+// ============================================================
+
+@use '../utilities/variables' as *;
+
+// Grid maestro de la home. grid-template-areas nombra cada sección
+// para reordenar el layout sin tocar el orden del HTML.
+.grid-secciones {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+        "pagos"
+        "envios"
+        "atencion";
+    gap: 24px;
+}
+
+.seccion-pagos { grid-area: pagos; }
+.seccion-envios { grid-area: envios; }
+.seccion-atencion { grid-area: atencion; }
+
+// Grid de catálogo de productos: mobile-first, 1 columna apilada.
+.grid-productos {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+
+    // Alineación del catálogo: se reserva un alto mínimo parejo al
+    // título (hasta 2 líneas) y a la descripción (hasta 3 líneas), así
+    // el bloque de texto superior mide igual en todas las tarjetas y la
+    // imagen queda alineada.
+    .subtitulo {
+        min-height: 84px;
+    }
+
+    .tarjeta > .parrafo {
+        min-height: 77px;
+    }
+
+    figure {
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+
+        // Foto con alto fijo + object-fit:contain para verse completa
+        // y del mismo tamaño en toda la grilla.
+        img {
+            width: 100%;
+            height: 260px;
+            object-fit: contain;
+            background-color: $blanco-puro;
+        }
+    }
+}
+
+// Grid de "sobre nosotros": mobile-first, 1 columna, áreas nombradas.
+.grid-nosotros {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+        "historia"
+        "mision"
+        "valores"
+        "equipo";
+    gap: 24px;
+}
+
+.seccion-historia { grid-area: historia; }
+.seccion-mision { grid-area: mision; }
+.seccion-valores { grid-area: valores; }
+.seccion-equipo { grid-area: equipo; }
+
+// Lista de valores de la empresa, con viñetas de disco.
+.lista-valores {
+    list-style: disc;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+// Grilla de la página de contacto: 1 columna (datos arriba, formulario
+// abajo); se abre a 2 columnas en desktop.
+.grid-contacto {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+}

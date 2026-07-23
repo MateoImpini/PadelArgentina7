@@ -1,0 +1,36 @@
+// ============================================================
+//  layout/_header.scss
+//  Cabecera: navbar de Bootstrap recoloreada con la paleta propia
+//  y la marca (logo + título). Las variantes responsivas de la
+//  navbar viven en layout/_responsive.scss para respetar el orden
+//  de la cascada.
+// ============================================================
+
+@use '../utilities/variables' as *;
+
+// Barra de navegación. navbar-dark (Bootstrap) deja el icono de
+// hamburguesa en blanco; acá pisamos el fondo con la superficie oscura.
+.navbar-personalizado {
+    background-color: $superficie-oscura;
+    padding: 12px 20px;
+}
+
+// Marca: logo (icono) junto al texto, alineados en una fila.
+.brand-personalizado {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+
+    .titulo-principal {
+        font-size: 28px;
+    }
+}
+
+// Logo (icono): alto fijo y ancho automático para conservar la
+// proporción. El PNG ya viene con fondo transparente.
+.logo-navbar {
+    height: 40px;
+    width: auto;
+}

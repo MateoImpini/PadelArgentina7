@@ -1,0 +1,62 @@
+// ============================================================
+//  components/_forms.scss
+//  Página de contacto: lista de datos y formulario (campos de
+//  Bootstrap recoloreados con la paleta).
+// ============================================================
+
+@use '../utilities/variables' as *;
+
+// Lista de datos de contacto: cada item con su icono y el texto.
+.lista-datos-contacto {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    list-style: none;
+
+    li {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        // min-width:0 permite que el item flex se achique por debajo
+        // del ancho de su contenido; sin esto un texto largo sin
+        // espacios (el email) genera scroll horizontal en mobile.
+        min-width: 0;
+
+        // overflow-wrap:anywhere corta las palabras largas (el email)
+        // cuando no entran, en vez de desbordar la tarjeta.
+        .parrafo,
+        .enlace-nav {
+            min-width: 0;
+            overflow-wrap: anywhere;
+        }
+    }
+}
+
+.dato-icono {
+    font-size: 22px;
+    line-height: 1;
+}
+
+// Formulario de contacto: el :focus pisa el celeste por defecto de
+// Bootstrap con el verde de acento del sitio.
+.formulario-contacto .form-label {
+    color: $texto-principal;
+    font-weight: 500;
+}
+
+.campo-formulario {
+    background-color: $blanco-puro;
+    border: 1px solid $borde-suave;
+    color: $texto-principal;
+
+    &:focus {
+        background-color: $blanco-puro;
+        border-color: $acento;
+        box-shadow: 0 0 0 0.2rem $foco-acento;
+        color: $texto-principal;
+    }
+
+    &::placeholder {
+        color: $texto-tenue;
+    }
+}

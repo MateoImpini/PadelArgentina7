@@ -1,0 +1,94 @@
+// ============================================================
+//  layout/_footer.scss
+//  Pie de página: bloques de redes, medios de pago y envío, y la
+//  franja de copyright.
+// ============================================================
+
+@use '../utilities/variables' as *;
+
+// Footer: bloques distribuidos con flex y separación via gap.
+.pie-pagina {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    background-color: $superficie-oscura;
+
+    // Texto en tonos claros para leerse sobre el fondo oscuro.
+    .titulo-footer {
+        color: $blanco-puro;
+    }
+
+    .parrafo {
+        color: $texto-claro;
+    }
+
+    .enlace-nav {
+        color: $texto-claro;
+
+        &:hover {
+            color: $blanco-puro;
+        }
+    }
+}
+
+// Franja de copyright: tono más suave para diferenciarla como cierre.
+.footer-copyright {
+    background-color: $verde-medio;
+    padding: 16px 20px;
+
+    .parrafo {
+        color: $texto-claro;
+    }
+}
+
+// Bloque de redes sociales.
+.redes-sociales {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.lista-redes {
+    display: flex;
+    gap: 16px;
+    list-style: none;
+}
+
+// Medios de pago y de envío: mismo patrón que redes-sociales; los
+// logos van en tarjetas blancas para leerse sobre cualquier fondo.
+.medios-pago,
+.medios-envio {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.lista-logos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    list-style: none;
+
+    // transform + transition: leve zoom al pasar el mouse sobre un logo.
+    li {
+        display: flex;
+        align-items: center;
+        background-color: $blanco-puro;
+        border-radius: 6px;
+        padding: 6px 10px;
+        transition: transform $transicion;
+
+        &:hover {
+            transform: scale(1.06);
+        }
+    }
+
+    img {
+        display: block;
+        height: 24px;
+        width: auto;
+    }
+}

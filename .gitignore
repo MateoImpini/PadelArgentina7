@@ -11,3 +11,8 @@ Desktop.ini
 # Archivos temporales
 *.log
 *.tmp
+
+# Node / Sass (el CSS compilado styles/style.css SÍ se versiona)
+node_modules/
+.sass-cache/
+*.css.map

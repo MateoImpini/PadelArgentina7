@@ -1,0 +1,87 @@
+// ============================================================
+//  components/_hero.scss
+//  Portada (hero) de la home: banner a ancho completo con degradado
+//  de marca y botones de llamada a la acción.
+// ============================================================
+
+@use '../utilities/variables' as *;
+
+// Banner de bienvenida a ancho completo (va fuera de .main-contenido).
+.hero {
+    background: linear-gradient(135deg, $verde-marca, $acento);
+    padding: 40px 20px;
+    box-shadow: $sombra-tarjeta;
+}
+
+.hero-contenido {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    max-width: 720px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+// Línea superior breve, en mayúsculas, sobre el título del hero.
+.hero-eyebrow {
+    color: $verde-lima;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.hero-titulo {
+    color: $blanco-puro;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.15;
+}
+
+.hero-texto {
+    color: $texto-claro;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.6;
+}
+
+// Fila de botones del hero: envuelve en mobile si no entran en línea.
+.hero-acciones {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+// CTA principal: relleno lima que contrasta con el fondo verde.
+.hero-btn-primario {
+    background-color: $verde-lima;
+    color: $verde-marca;
+    font-weight: 700;
+    border: 2px solid $verde-lima;
+    transition: background-color $transicion, transform $transicion;
+
+    &:hover,
+    &:focus {
+        background-color: $blanco-puro;
+        border-color: $blanco-puro;
+        color: $verde-marca;
+        transform: translateY(-2px);
+    }
+}
+
+// CTA secundario: contorno lima sobre fondo transparente.
+.hero-btn-secundario {
+    background-color: transparent;
+    color: $blanco-puro;
+    border: 2px solid $verde-lima;
+    transition: background-color $transicion, color $transicion;
+
+    &:hover,
+    &:focus {
+        background-color: $verde-lima;
+        color: $verde-marca;
+    }
+}

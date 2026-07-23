@@ -1,0 +1,37 @@
+// ============================================================
+//  main.scss  —  ÚNICO punto de entrada de la hoja de estilos.
+//
+//  Orquesta todos los partials con @use. El orden importa: primero
+//  utilidades (variables y mixins, sin salida CSS), luego base,
+//  layout y componentes, y al final los overrides responsivos para
+//  que ganen en la cascada.
+//
+//  Compilar con:
+//    sass scss/main.scss styles/style.css
+//  (o en modo watch: sass --watch scss/main.scss styles/style.css)
+// ============================================================
+
+// --- Utilidades (no emiten CSS por sí solas) ---
+@use 'utilities/variables' as *;
+@use 'utilities/mixins' as *;
+
+// --- Base: reset, tipografía y estilos globales a etiquetas ---
+@use 'base/base';
+@use 'base/tipografia';
+
+// --- Layout: cabecera, navegación, grillas y pie ---
+@use 'layout/header';
+@use 'layout/nav';
+@use 'layout/grid';
+@use 'layout/footer';
+
+// --- Componentes reutilizables ---
+@use 'components/hero';
+@use 'components/cards';
+@use 'components/carousel';
+@use 'components/buttons';
+@use 'components/modal';
+@use 'components/forms';
+
+// --- Escalera responsiva (debe ir al final) ---
+@use 'layout/responsive';

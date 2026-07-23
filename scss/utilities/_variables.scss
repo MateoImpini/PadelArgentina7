@@ -1,0 +1,67 @@
+// ============================================================
+//  utilities/_variables.scss
+//  Variables del sistema de diseño (paleta + tokens + utilidades).
+//  Centralizar los valores acá evita repetir colores/medidas en
+//  decenas de reglas y permite reajustar toda la estética desde
+//  un solo lugar. Todas las variables usan $ (variables de Sass).
+// ============================================================
+
+// --- Paleta base (colores crudos del sitio) ---
+
+// Verdes
+$verde-marca: rgb(22, 34, 22);
+$verde-oscuro: rgb(40, 56, 38);
+$verde-medio: rgb(44, 62, 44);
+$verde-lima: rgb(233, 250, 158);
+
+// Marrones (acentos)
+$marron: rgb(85, 32, 1);
+$marron-oscuro: rgb(58, 21, 0);
+$marron-suave: rgb(80, 64, 46);
+$marron-suave-oscuro: rgb(50, 40, 28);
+$marron-titulo: rgb(32, 12, 0);
+
+// Neutros
+$blanco: rgb(255, 254, 254);
+$blanco-puro: rgb(255, 255, 255);
+$negro: rgb(0, 0, 0);
+
+// --- Tokens semánticos ---
+// Describen el ROL de cada color (fondo, texto, acento...) en vez
+// del color en sí. Las reglas del sitio usan estos tokens: cambiando
+// estos pocos valores se repinta toda la estética.
+
+// Paleta "Verde cancha": monocromática verde sobre crema
+$fondo-pagina: rgb(247, 247, 239);
+$fondo-tarjeta: rgb(233, 241, 211);
+$superficie-oscura: rgb(30, 46, 30);
+
+$texto-principal: rgb(31, 42, 31);
+$texto-secundario: rgb(91, 107, 79);
+$texto-tenue: rgb(130, 135, 120);
+$texto-claro: rgb(233, 241, 211);
+
+$acento: rgb(46, 94, 52);
+$acento-boton: $acento;
+$acento-boton-hover: rgb(35, 72, 38);
+$texto-sobre-acento: $blanco;
+
+// Bordes translúcidos (marrón suave con alpha) reutilizados en modal/formulario
+$borde-suave: rgba(80, 64, 46, 0.25);
+$foco-acento: rgba(46, 94, 52, 0.25);
+$caption-fondo: rgba(40, 56, 38, 0.75);
+
+// --- Utilidades reutilizables ---
+$radio: 8px;
+$sombra-tarjeta: 0 2px 6px rgba(0, 0, 0, 0.08);
+$sombra-tarjeta-hover: 0 8px 16px rgba(0, 0, 0, 0.15);
+$transicion: 0.2s ease;
+
+// --- Puntos de quiebre (breakpoints) ---
+$bp-tablet: 768px;
+$bp-desktop: 1024px;
+$bp-mobile-max: 767.98px;
+$bp-navbar-max: 991.98px;
+
+// --- Tipografía ---
+$fuente-base: 'Roboto', sans-serif;

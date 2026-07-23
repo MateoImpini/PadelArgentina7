@@ -1,0 +1,25 @@
+// ============================================================
+//  components/_modal.scss
+//  Modal de detalle de producto (Bootstrap) con los colores del sitio.
+// ============================================================
+
+@use '../utilities/variables' as *;
+
+.modal-personalizado {
+    background-color: $fondo-tarjeta;
+    border-radius: $radio;
+
+    .modal-header,
+    .modal-footer {
+        border-color: $borde-suave;
+    }
+
+    .modal-title {
+        margin-bottom: 0;
+
+        // El subtítulo dentro del modal no lleva la línea de acento.
+        &.subtitulo::after {
+            display: none;
+        }
+    }
+}

@@ -1,0 +1,35 @@
+// ============================================================
+//  components/_carousel.scss
+//  Carousel de Bootstrap recoloreado con la paleta del sitio.
+// ============================================================
+
+@use '../utilities/variables' as *;
+
+.carousel-personalizado {
+    // Imagen contenida sobre fondo claro para que las fotos de
+    // producto (fondo blanco/transparente) no se recorten.
+    .carousel-item img {
+        height: 380px;
+        width: 100%;
+        object-fit: contain;
+        background-color: $fondo-tarjeta;
+        border-radius: $radio;
+    }
+
+    .carousel-caption {
+        background-color: $caption-fondo;
+        border-radius: $radio;
+        bottom: 24px;
+    }
+
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+        background-color: $superficie-oscura;
+        border-radius: 50%;
+        padding: 18px;
+    }
+
+    .carousel-indicators [data-bs-target] {
+        background-color: $acento;
+    }
+}

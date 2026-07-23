@@ -1,0 +1,48 @@
+// ============================================================
+//  layout/_nav.scss
+//  Enlaces de navegación: los de la navbar (sobre fondo oscuro) y
+//  los genéricos del sitio, más el foco accesible de teclado.
+// ============================================================
+
+@use '../utilities/variables' as *;
+
+// Links de la navbar en tonos claros para leerse sobre el fondo
+// oscuro. Especificidad igualada a .navbar-dark .navbar-nav .nav-link
+// de Bootstrap para poder pisar sus colores por defecto.
+.navbar-personalizado .navbar-nav .enlace-nav {
+    color: $texto-claro;
+
+    &:hover,
+    &:focus {
+        color: $blanco-puro;
+    }
+}
+
+// Enlaces genéricos del sitio (footer, contacto, etc.).
+.enlace-nav {
+    color: $acento;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color $transicion;
+
+    &:hover {
+        color: $acento-boton-hover;
+        text-decoration: underline;
+    }
+
+    // Marca el link de la página actual (aria-current="page").
+    &[aria-current="page"] {
+        text-decoration: underline;
+        font-weight: 700;
+    }
+}
+
+// Accesibilidad: contorno visible al navegar con teclado (Tab) sobre
+// enlaces y botones, sin afectar el click con el mouse (:focus-visible).
+.enlace-nav:focus-visible,
+.btn-detalle:focus-visible,
+.hero-acciones .btn:focus-visible {
+    outline: 3px solid $acento;
+    outline-offset: 2px;
+    border-radius: 4px;
+}
