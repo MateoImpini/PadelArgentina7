@@ -380,7 +380,8 @@ para verse completa y del mismo tamaño en toda la grilla
 
 .grid-productos figure {
     width: 100%;
-    align-items: stretch;
+    align-items: center;
+    justify-content: center;
 }
 
 .grid-productos figure img {
@@ -1007,9 +1008,19 @@ se compactan padding, titulo, alto de imagen y se quitan las alturas minimas
         min-height: 0;
     }
 
-    .grid-productos figure img {
+    .grid-productos figure {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
         height: 150px;
+    }
+
+    .grid-productos figure img {
+        max-height: 150px;
+        max-width: 100%;
         object-fit: contain;
+        object-position: center;
     }
 
     /* en la tarjeta angosta, el precio tachado + el precio nuevo no entran en
