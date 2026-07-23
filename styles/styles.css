@@ -976,3 +976,52 @@ el menu vuelve a fila y el logo deja de ocupar el 100% del ancho
         font-size: 34px;
     }
 }
+
+/*
+mobile (<768px): el catalogo de productos pasa a 2 columnas (estilo tienda),
+en vez de una sola tarjeta ancha por fila. como cada tarjeta queda angosta,
+se compactan padding, titulo, alto de imagen y se quitan las alturas minimas
+(pensadas para alinear filas en desktop) para que no queden tarjetas enormes
+*/
+
+@media (max-width: 767.98px) {
+    .grid-productos {
+        /* minmax(0, 1fr) en vez de 1fr: permite que las columnas bajen de su
+           contenido minimo y queden exactamente iguales (con 1fr, un texto o
+           precio largo ensancha una columna y descuadra el grid) */
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .grid-productos .tarjeta {
+        padding: 12px;
+        gap: 8px;
+    }
+
+    .grid-productos .subtitulo {
+        font-size: 17px;
+        min-height: 0;
+    }
+
+    .grid-productos .tarjeta > .parrafo {
+        min-height: 0;
+    }
+
+    .grid-productos figure img {
+        height: 150px;
+        object-fit: contain;
+    }
+
+    /* en la tarjeta angosta, el precio tachado + el precio nuevo no entran en
+       una linea: se apila el anterior arriba para que no desborde */
+    .grid-productos .precio-anterior {
+        display: block;
+        margin-right: 0;
+    }
+
+    /* en mobile, esconder la descripcion de cada producto: solo aparece en el
+       modal de "Ver detalle" al hacer click */
+    .grid-productos .tarjeta > .parrafo {
+        display: none;
+    }
+}
